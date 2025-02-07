@@ -1,0 +1,105 @@
+<!-- FOOTER STYLES -->
+<style>
+    .mini-footer {
+        background: rgba(127, 208, 255, 0.95); /* Same as header */
+        backdrop-filter: blur(10px);
+        padding: 15px 4%;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.12);
+        color: #130404;
+        text-align: center;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1024px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+    }
+
+    .footer-logo {
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: #130404;
+    }
+
+    .footer-links {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        display: inline;
+    }
+
+    .footer-links a {
+        color: #130404;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+
+    .footer-links a:hover {
+        color: #161d1d;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        color: #130404;
+        font-size: 35px;
+        font-weight: bold;
+        transition: 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: #161d1d;
+    }
+
+    .footer-bottom {
+        font-size: 0.8rem;
+        margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+        }
+    }
+</style>
+
+<footer class="mini-footer">
+    <div class="footer-content">
+        <a href="#" class="footer-logo">BlogBeat</a>
+
+        <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <!-- <li><a href="#">Blog</a></li> -->
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 BlogBeat. All rights reserved. | <a href="#">Django Project</a></p>
+    </div>
+</footer>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+

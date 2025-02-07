@@ -1,0 +1,121 @@
+{%load static%}
+<style>
+
+.singleblog-card {
+    width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+**Blog Post Image**
+------------------
+
+.singleimg {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.singleimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+**Blog Post Content**
+--------------------
+
+.singlecontain {
+    padding: 20px;
+}
+
+.singlecontain h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.singlecontain hr {
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.singlecontain p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #666;
+}
+
+.singlecontain strong {
+    font-weight: bold;
+}
+
+**Author Information**
+---------------------
+
+.singlecontain p strong {
+    font-size: 18px;
+    color: #333;
+}
+
+.singlecontain p strong + span {
+    font-size: 16px;
+    color: #666;
+}
+
+
+
+@media (max-width: 768px) {
+    .singleblog-card {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .singleblog-card {
+        width: 100%;
+        padding: 10px;
+    }
+    .singleimg {
+        height: 150px;
+    }
+    .singlecontain h2 {
+        font-size: 20px;
+    }
+    .singlecontain p {
+        font-size: 16px;
+    }
+}
+</style>
+        <article class="singleblog-card">
+            <div class="singlecard-container">
+                {% if blog.blog_image %}
+                    <div class="singleimg">
+                        <img src="{{ blog.blog_image.url }}" alt="Blog Image">
+                    </div>
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+                <div class="singlecontain">
+                    <h2>{{ blog.title }}</h2>
+                    <hr>
+                    <p>{{ blog.description }}</p>
+                    {% if blog.user %}
+                        <p><strong>Author:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+                    {% else %}
+                        <p><strong>Author:</strong> Unknown</p>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    
+
+
+
+

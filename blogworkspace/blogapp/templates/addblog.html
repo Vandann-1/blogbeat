@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* Header Styling */
+        .blog-header {
+            background: linear-gradient(135deg, #0066ff, #00ccff);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            position: relative;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-header::after {
+            
+            font-size: 2.5rem;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Centering the form */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 150px);
+            padding: 20px;
+        }
+
+        /* Form Styling */
+        .form-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        .form-box h2 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .form-box label {
+            display: block;
+            text-align: left;
+            margin: 0.5rem 0 0.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-box input,
+        .form-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .form-box textarea {
+            resize: none;
+        }
+
+        .form-box button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #0066ff;
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .form-box button:hover {
+            background: #004bcc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .blog-header {
+                font-size: 1.5rem;
+                padding: 30px 15px;
+            }
+
+            .form-box {
+                width: 90%;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="blog-header">
+        Create Your Blog
+    </header>
+
+    <div class="form-container">
+        <div class="form-box">
+            <h2>Create Blog</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" maxlength="50" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" maxlength="200" required rows="5"></textarea>
+
+                <label for="blog_image">Blog Image:</label>
+                <input type="file" id="blog_image" name="blog_image" accept="image/*">
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
+    
+

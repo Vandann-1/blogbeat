@@ -1,0 +1,13 @@
+create environment  - python-m venv pe
+# activate environment  - pe\Scripts\activate
+pip install django
+create new project  - django-admin startproject myproject
+change dic cd projectname
+django runproject - python manage.py runserver
+
+
+
+
+
+
+(User,on_delete=models.CASCADE) it means we can delete user if we dont use this so we cant delete user

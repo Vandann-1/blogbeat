@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --accent: #161d1d;
+            --text: #130404;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .ultra-header {
+            background: rgba(127, 208, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.291);
+            box-shadow: 0 8px 32px rgba(116, 87, 87, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blogbeat {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid var(--accent);
+        }
+
+        .profile-info {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .profile-actions a, .profile-actions form button {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(45deg, #0066ff, var(--accent));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 243, 255, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .profile-actions a:hover, .profile-actions form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .profile-details {
+            text-align: left;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(240, 240, 240, 0.8);
+            border-radius: 8px;
+        }
+
+        .profile-details h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .profile-details p {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .saved-blogs {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(230, 230, 230, 0.9);
+            border-radius: 8px;
+        }
+
+        .saved-blogs h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .saved-blogs ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .saved-blogs li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .saved-blogs a {
+            text-decoration: none;
+            color: #0066ff;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .saved-blogs a:hover {
+            color: #0044cc;
+        }
+    </style>
+</head>
+<body>
+    <header class="ultra-header">
+        <div class="blogbeat">BlogBeat</div>
+    </header>
+
+    <div class="profile-container">
+        <img src="{% static 'images/profile-icon.png' %}" alt="Profile Picture" class="profile-picture">
+        <form action="/update-profile-pic" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="profile_picture" accept="image/*">
+            <button type="submit">Update Picture</button>
+        </form>
+        <h2 class="profile-info">{{ user.first_name }} {{ user.last_name }}<h2>
+        <p class="profile-info">{{ user.email }}</p>
+        <div class="profile-actions">
+            <a href="#">Edit Profile</a>
+            <a href="/accounts/logout">Logout</a>
+        </div>
+        <div class="profile-details">
+            <h3>Additional Information</h3>
+            <p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>Joined:</strong> {{ user.date_joined }}</p>
+            <p><strong>Last Login:</strong> {{ user.last_login }}</p>
+        </div>
+        <div class="saved-blogs">
+            <h3>Saved Blogs</h3>
+            <ul>
+                {% for blog in blogs %}
+                 <img src="{{blog.blog_image.url}}" alt="">
+                {% empty %}
+                    <li>No saved blogs yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
+
