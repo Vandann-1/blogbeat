@@ -81,4 +81,8 @@ def Userprofile(request):
     blogs=Blog.objects.filter(user=request.user).order_by("create_at")
     
     return render(request, 'profile.html',{"blogs":blogs})
+
+
+# COMMENT FROM NEW_FEATURE BRANCH
+
             
