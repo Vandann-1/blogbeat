@@ -84,5 +84,9 @@ def Userprofile(request):
 
 
 # COMMENT FROM NEW_FEATURE BRANCH
+from django.views import View
 
-            
+class SaveBlogsOnPorfileView(View):
+    pass 
+
+# --03e0edededwe933933237777733332233e
