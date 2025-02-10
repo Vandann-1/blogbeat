@@ -62,7 +62,7 @@
         }
 
         .profile-info {
-            font-size: 1.2rem;
+            font-size: 0.7rem;
             color: var(--text);
             margin-bottom: 1rem;
         }
@@ -89,12 +89,12 @@
         .profile-details {
             text-align: left;
             margin-top: 1.5rem;
-            padding: 1rem;
+            padding: 10px;
             background: rgba(240, 240, 240, 0.8);
             border-radius: 8px;
         }
 
-        .profile-details h3 {
+        .profile-details h4 {
             margin-bottom: 0.5rem;
             color: var(--text);
         }
@@ -111,7 +111,7 @@
             border-radius: 8px;
         }
 
-        .saved-blogs h3 {
+        .saved-blogs h5 {
             color: var(--text);
             margin-bottom: 1rem;
         }
@@ -157,13 +157,13 @@
             <a href="/accounts/logout">Logout</a>
         </div>
         <div class="profile-details">
-            <h3>Additional Information</h3>
-            <p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
-            <p><strong>Joined:</strong> {{ user.date_joined }}</p>
-            <p><strong>Last Login:</strong> {{ user.last_login }}</p>
+            <h4>Additional Information</h4>
+            <p>Full Name: {{ user.first_name }} {{ user.last_name }}</p>
+            <p>Joined: {{ user.date_joined }}</p>
+            <p>Last Login: {{ user.last_login }}</p>
         </div>
         <div class="saved-blogs">
-            <h3>Saved Blogs</h3>
+            <h4>Saved Blogs</h4>
             <ul>
                 {% for blog in blogs %}
                  <img src="{{blog.blog_image.url}}" alt="">

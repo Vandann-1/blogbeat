@@ -132,52 +132,6 @@
     gap: 20px; /* Space between images */
   }
   
-  .responsive-image {
-    max-width: 100%; /* Responsive width */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Cover the container */
-  }
-    /* Slider Container */
-    .slider-container {
-      width: 100%;
-      height: auto;
-      overflow: hidden;
-      position: relative;
-    }
-  
-    /* Individual Slide */
-    .slide {
-      display: none;
-      width: 100%;
-    }
-  
-    /* Active Slide */
-    .active-slide {
-      display: block;
-    }
-  
-    /* Controls */
-    .slider-controls {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-    }
-  
-    .control-btn {
-      background-color: rgba(0, 0, 0, 0.5);
-      border: none;
-      color: #fff;
-      padding: 10px;
-      cursor: pointer;
-    }
-  
-  
-
-
-
 
 </style>
 
@@ -191,16 +145,6 @@
 </form>
 </div>
 
-<div class="slider-container">
-  <div class="slide active-slide"><img src="path/to/your/image1.jpg" alt="Image 1" class="responsive-image"></div>
-  <div class="slide"><img src="path/to/your/image2.jpg" alt="Image 2" class="responsive-image"></div>
-  <div class="slide"><img src="path/to/your/image3.jpg" alt="Image 3" class="responsive-image"></div>
-
-  <div class="slider-controls">
-    <button class="control-btn" onclick="prevSlide()">&#10094;</button>
-    <button class="control-btn" onclick="nextSlide()">&#10095;</button>
-  </div>
-</div>
 
 {% if blogs %}
 <div class="blog-container">
