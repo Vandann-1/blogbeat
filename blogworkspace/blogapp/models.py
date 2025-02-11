@@ -16,8 +16,8 @@ class Blog(models.Model):
         
 class saved_Blog(models.Model):
     blog=models.ForeignKey(Blog,on_delete=models.CASCADE)
-    user=models.ForeignKey(User,on_delete=models.CASCADE) #it means delete all user blog
-    saved_at=models.DateTimeField(auto_now_add=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)  #it means delete all user blog
+    saved_at=models.DateTimeField(auto_now_add=True)  
     
     class Meta:
         unique_together =('user','blog')
