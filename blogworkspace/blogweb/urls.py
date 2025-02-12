@@ -37,6 +37,8 @@ urlpatterns = [
     
     path("search",searchbg,name="searchblog"),
     path("re/<int:blog_id>/",is_reccuring, name="re"),
-    path("profile",Userprofile,name="profile")
+    path("profile",Userprofile,name="profile"),
+    path("editprofile",editpf,name="editprofile"),
+    
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -83,6 +83,16 @@ def Userprofile(request):
     return render(request, 'profile.html',{"blogs":blogs})
 
 
+def editpf(request):
+    if request.method == 'POST':
+        user = request.user
+        user.first_name = request.POST.get("first_name")
+        user.last_name = request.POST.get("last_name")
+        user.email = request.POST.get("email")
+        user.save()
+        return redirect('profile')
+    return render(request, 'editpf.html')
+    
 # COMMENT FROM NEW_FEATURE BRANCH
 from django.views import View
 
