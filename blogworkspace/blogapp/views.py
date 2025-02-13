@@ -82,16 +82,19 @@ def Userprofile(request):
     
     return render(request, 'profile.html',{"blogs":blogs})
 
-
+@login_required
 def editpf(request):
+    user = request.user
     if request.method == 'POST':
-        user = request.user
+       
         user.first_name = request.POST.get("first_name")
         user.last_name = request.POST.get("last_name")
         user.email = request.POST.get("email")
-        user.save()
+        first_name = user.first_name
+        user.save()   # To save the changes/update
+        
         return redirect('profile')
-    return render(request, 'editpf.html')
+    return render(request, 'editpf.html',{'user':user})
     
 # COMMENT FROM NEW_FEATURE BRANCH
 from django.views import View
