@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from blogapp.models import Blog
+from django.contrib.auth.models import User   # Import User model from Django's auth module
+from blogapp.models import Blog,Profile
+from django.contrib import messages
 
 
 def register(request):
@@ -23,14 +24,14 @@ def register(request):
     return render(request, "registers.html")
 
 
-@login_required(login_url="login")  # Redirect to login page if not authenticated
+@login_required(login_url="login")   # Redirect to login page if not authenticated
 def home(request):
     blogs = Blog.objects.all()
     return render(request, "home.html", {"blogs": blogs})
 
 
 def loginview(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated:   
         return redirect("home")
 
     if request.method == "POST":
@@ -42,6 +43,7 @@ def loginview(request):
             login(request, user)
             return redirect("home")  # Redirect to home after successful login
         else:
+            messages.error(request,"invalid email or password. ")
             return redirect("login")  # Fix redirect loop issue
 
     return render(request, "login.html")

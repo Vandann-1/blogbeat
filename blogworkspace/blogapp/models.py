@@ -14,13 +14,16 @@ class Blog(models.Model):
     class Meta:
         db_table="Blogs"    #to change table name in 
         
-class saved_Blog(models.Model):
-    blog=models.ForeignKey(Blog,on_delete=models.CASCADE)
-    user=models.ForeignKey(User,on_delete=models.CASCADE)  #it means delete all user blog
-    saved_at=models.DateTimeField(auto_now_add=True)  
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pics/', default='default.jpg')
+
+    def __str__(self):
+        return self.user.username
     
-    class Meta:
-        unique_together =('user','blog')
+    
+
+
         
         
 
