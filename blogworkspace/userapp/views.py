@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User   # Import User model from Django's auth module
-from blogapp.models import Blog,Profile,Comment,Replycmt
+from blogapp.models import Blog,Profile,Comment,ReplyComment
 from django.contrib import messages
 
 
@@ -24,7 +24,7 @@ def register(request):
     return render(request, "registers.html")
 
 
-@login_required(login_url="login")   # Redirect to login page if not authenticated
+
 def home(request):
     blogs = Blog.objects.all()
     return render(request, "home.html", {"blogs": blogs})
@@ -53,6 +53,8 @@ def loginview(request):
 def logoutview(request):
     logout(request)
     return redirect("login")  # Redirect to login page after logout
+
+
 
 
     

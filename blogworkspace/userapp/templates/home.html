@@ -111,17 +111,18 @@
 <div class="hero-section">
   <h1>Welcome to BlogBeat</h1>
   <p>Explore the best blogs on various topics.</p>
-  <div class="search-container">
-    <form action="/search">
-      <input type="text" class="search-input" placeholder="Search blogs..." name="q">
-      <button class="search-button">Search</button>
-    </form>
-  </div>
+</div>
+
+
+
+<!-- Search Bar -->
+<div class="search-container">
+  <input type="text" id="searchBar" placeholder="Search blogs..." onkeyup="filterBlogs()">
 </div>
 
 <div class="course-section">
   <h2>Top Blogs</h2>
-  <div class="course-container">
+  <div class="course-container" id="blogContainer">
     {% for blog in blogs %}
     <a href="blogs/{{ blog.id }}" class="course-card">
       <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}'); background-size: cover;"></div>
@@ -129,11 +130,58 @@
         <div class="course-title">{{ blog.title }}</div>
         <p class="course-desc">{{ blog.description }}</p>
         <p><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+        <p>Comments - {{blog.comments.all}}</p>
       </div>
     </a>
     {% endfor %}
   </div>
 </div>
 
-{% endblock %}
 
+
+<style>
+  .search-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  #searchBar {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  #searchBar:focus {
+    border-color: #007bff;
+  }
+</style>
+
+
+
+
+<!-- Real time searchh -->
+<script>
+function filterBlogs() {
+  let input = document.getElementById('searchBar').value.toLowerCase();
+  let blogContainer = document.getElementById('blogContainer');
+  let blogs = blogContainer.getElementsByClassName('course-card');
+
+  for (let i = 0; i < blogs.length; i++) {
+    let title = blogs[i].querySelector(".course-title").textContent.toLowerCase();
+    let desc = blogs[i].querySelector(".course-desc").textContent.toLowerCase();
+    
+    if (title.includes(input) || desc.includes(input)) {
+      blogs[i].style.display = "block";
+    } else {
+      blogs[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+
+{% endblock %}
