@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User   # Import User model from Django's auth module
-from blogapp.models import Blog,Profile
+from blogapp.models import Blog,Profile,Comment,Replycmt
 from django.contrib import messages
 
 

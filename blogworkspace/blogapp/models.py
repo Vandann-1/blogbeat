@@ -21,6 +21,17 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
+#comments features crud operation    
+class Comment(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')  #
+    comments= models.TextField()
+    Create_at = models.DateTimeField()
+    
+#repleies comments features  crud operation 
+class Replycmt(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+    replies = models.CharField(max_length=500)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='commentss')  
     
 
 

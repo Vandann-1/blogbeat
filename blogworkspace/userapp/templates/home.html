@@ -3,45 +3,53 @@
 {% block content %}
 <br><br><br>
 <style>
-  /* Smooth gradient animated background */
+  /* Homepage inspired by Udemy */
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #8ec5fc, #e0c3fc);
-    background-size: 400% 400%;
-    animation: gradientBG 10s infinite linear;
+    background: #ffffff;
     color: #333;
-    background-attachment: fixed;
   }
 
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  .hero-section {
+    text-align: center;
+    padding: 50px 20px;
+    background: #6c5ce7;
+    color: white;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-section p {
+    font-size: 1.2rem;
+    opacity: 0.9;
   }
 
   .search-container {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin-top: 20px;
   }
 
   .search-input {
-    width: 300px;
-    padding: 10px;
+    width: 400px;
+    padding: 12px;
     border: 2px solid #36cef4;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .search-button {
-    padding: 10px 15px;
+    padding: 12px 20px;
     margin-left: 5px;
     border: none;
     background: #36cef4;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
@@ -52,114 +60,80 @@
     transform: scale(1.1);
   }
 
-  /* Blog container with animated effects */
-  .blog-container {
+  .course-section {
+    padding: 40px 5%;
+  }
+
+  .course-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    padding: 20px;
-    justify-content: center;
   }
 
-  /* Glassmorphism card effect */
-  .blog-card {
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    padding: 15px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s forwards;
-  }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .blog-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-  }
-
-  .img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 180px;
-    overflow: hidden;
+  .course-card {
+    background: #f8f8f8;
     border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
   }
 
-  .img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  .course-card:hover {
+    transform: scale(1.05);
   }
 
-  .img img:hover {
-    transform: scale(1.1);
+  .course-img {
+    height: 150px;
+    background: #ddd;
   }
 
-  .contain {
+  .course-content {
     padding: 15px;
-    text-align: center;
   }
 
-  .contain span {
-    font-size: 20px;
+  .course-title {
+    font-size: 18px;
     font-weight: bold;
-    color: #ff4a4a;
-    display: block;
   }
 
-  .contain p {
+  .course-desc {
     font-size: 14px;
-    color: #555;
-    margin: 5px 0;
+    color: #666;
   }
 
-  /* Responsive for smaller screens */
   @media (max-width: 768px) {
-    .blog-container {
-      grid-template-columns: 1fr;
+    .search-input {
+      width: 80%;
     }
   }
-
 </style>
-<br>
-<div>
-  <form action="/search">
-    <div class="search-container">
-      <input type="text" class="search-input" placeholder="Search..." name="q">
+
+<div class="hero-section">
+  <h1>Welcome to BlogBeat</h1>
+  <p>Explore the best blogs on various topics.</p>
+  <div class="search-container">
+    <form action="/search">
+      <input type="text" class="search-input" placeholder="Search blogs..." name="q">
       <button class="search-button">Search</button>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
 
-{% if blogs %}
-<div class="blog-container">
-  {% for blog in blogs %}
-  <a href="blogs/{{ blog.id }}">
-    <div class="blog-card">
-      <div class="img"><img src="{{ blog.blog_image.url }}" alt=""></div>        
-      <div class="contain">
-        <span>{{ blog.title }}</span>
-        <p>{{ blog.description }}</p>
-        <p><strong>Author:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+<div class="course-section">
+  <h2>Top Blogs</h2>
+  <div class="course-container">
+    {% for blog in blogs %}
+    <a href="blogs/{{ blog.id }}" class="course-card">
+      <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}'); background-size: cover;"></div>
+      <div class="course-content">
+        <div class="course-title">{{ blog.title }}</div>
+        <p class="course-desc">{{ blog.description }}</p>
+        <p><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
       </div>
-    </div>
-  </a>
-  {% endfor %}
+    </a>
+    {% endfor %}
+  </div>
 </div>
-{% else %}
-<h2 style="text-align: center;">No Blogs Found!</h2>
-{% endif %}
 
 {% endblock %}
+
