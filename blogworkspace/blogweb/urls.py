@@ -35,7 +35,6 @@ urlpatterns = [
     path('edit_blog/<int:bg_id>/',edit_blog,name="edit_blog"),
     path('delete_blog/<int:bg_id>/',delete_blog,name="delete_blog"),
     
-    path("search",searchbg,name="searchblog"),
     path("re/<int:blog_id>/",is_reccuring, name="re"),
     path("profile",Userprofile,name="profile"),
     path("editprofile",editpf,name="editprofile"),
