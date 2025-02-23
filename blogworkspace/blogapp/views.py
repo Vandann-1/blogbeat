@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Blog
+from .models import Blog, Comment
 from django.contrib.auth.decorators import login_required   #its basic use is that to login to auth
 # Create your views here.
 @login_required    #its means we need to login to access this view
@@ -21,11 +21,19 @@ def addblog(request):
         return render(request,"addblog.html")    
         
         
+
+# changes
 @login_required
 def viewBg(request, bg_id):
     blog = get_object_or_404(Blog, id=bg_id)
+    comments=blog.comments.all()
+    print("FOUND COMMENTS:",comments)
     print(f'foundedblog{blog}')
-    return render(request, "vb.html",{"blog": blog})
+    return render(request, "vb.html",{"blog": blog,'comments':comments})
+
+
+
+
 
 #-----------------------------------------------------------------------------------
 @login_required
@@ -64,11 +72,6 @@ def edit_blog(request, bg_id):
     return render(request, "editblog.html", {"blog": blog})
     
 #-------------------------------------------------------------------------
-@login_required
-def searchbg(request):
-    q=request.GET.get("q")
-    blogs= Blog.objects.filter(description__contains=q)  
-    return render(request, "home.html",{"blogs": blogs})
 
 
     
@@ -93,7 +96,7 @@ def editpf(request):
         user.save()   # To save the changes/update
         
         return redirect('profile')
-    return render(request, 'editpf.html',{'user':user})
+    return render(request, 'editpf.html',{'user':user} )
     
 # COMMENT FROM NEW_FEATURE BRANCH
 from django.views import View

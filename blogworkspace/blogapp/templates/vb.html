@@ -113,6 +113,7 @@
     }
 }
 </style>
+<<<<<<< HEAD
 
 <div class="blog-page">
     <!-- Blog Content -->
@@ -142,6 +143,49 @@
 {% endblock %}
 
 
+=======
+        <article class="singleblog-card">
+            <div class="singlecard-container">
+                {% if blog.blog_image %}
+                    <div class="singleimg">
+                        <img src="{{ blog.blog_image.url }}" alt="Blog Image">
+                    </div>
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+                <div class="singlecontain">
+                    <h2>{{ blog.title }}</h2>
+                    <hr>
+                    <p>{{ blog.description }}</p>
+
+                    {% if comments %}
+                      <h1>Comments</h1>
+                      {% for comment in comments %}
+                        <strong>
+                            {{comment.user.username}}
+                        </strong>
+                        <strong>
+                            {{comment.comments}}
+                        </strong>
+
+                        {% if request.user == comment.user %}
+                          <p>Administrative actions are available !</p>
+                        {% endif  %}
+                          
+                      {% endfor %}  
+                    {% endif %}   
+
+
+                    {% if blog.user %}
+                        <p><strong>Author:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+                    {% else %}
+                        <p><strong>Author:</strong> Unknown</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </article>
+>>>>>>> 6171ce67a0cd7262a7bf9521bcc17bbd5d2332ae
     
 
 
