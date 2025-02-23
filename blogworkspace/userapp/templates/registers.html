@@ -1,123 +1,173 @@
-{%extends "custom.html"%}
+{% extends "custom.html" %}
+{% block content %}
 
-{%block content%}
-<br> <br> <br>
-    </form><br><br><br>
-    <h1 style="text-align: center;">Welcome to Register Page</h1>
-    
-    <div class="form-container">
-        <div class="form-box">
+<style>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Full Page Centering */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f8f9fd;
+}
+
+/* Registration Box */
+.register-box {
+    display: flex;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+    width: 750px;
+    transition: 0.3s ease-in-out;
+}
+
+.register-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Left Side - Form */
+.register-form {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.register-form h2 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.register-form label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    display: block;
+    margin-top: 10px;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.register-form input:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 8px rgba(108, 92, 231, 0.3);
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    background: linear-gradient(45deg, #6c5ce7, #4834d4);
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    background: linear-gradient(45deg, #4834d4, #302b63);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(108, 92, 231, 0.5);
+}
+
+/* Right Side - Illustration */
+.register-illustration {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-illustration img {
+    width: 100%;
+    max-width: 250px;
+}
+
+/* Already a Member */
+.already-member {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.already-member a {
+    color: #6c5ce7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.already-member a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .register-box {
+        flex-direction: column;
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .register-form {
+        padding-right: 0;
+    }
+
+    .register-illustration img {
+        display: none; /* Hide illustration on small screens */
+    }
+}
+</style>
+
+<div class="register-container">
+    <div class="register-box">
+        <!-- Left: Form -->
+        <div class="register-form">
+            <h2>Sign Up</h2>
             <form method="POST">
                 {% csrf_token %}
-                <h2>Sign Up</h2>
-    
                 <label for="firstname">First Name:</label>
                 <input type="text" id="firstname" name="firstname" required>
-    
+
                 <label for="lastname">Last Name:</label>
                 <input type="text" id="lastname" name="lastname" required>
-    
+
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-    
+
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-    
-                <button type="submit">Submit</button>
+
+                <button type="submit" class="register-btn">Register</button>
             </form>
+            <p class="already-member">I am already a member? <a href="/login/">Login</a></p>
+        </div>
+
+        <!-- Right: Illustration -->
+        <div class="register-illustration">
+            <img src="{% static 'images/register-illustration.png' %}" alt="Sign Up Illustration">
         </div>
     </div>
-    
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-    
-        /* Centering the form */
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: white; /* Matching header/footer */
-            backdrop-filter: blur(12px);
-        }
-    
-        /* Form Styling */
-        .form-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
-            width: 380px;
-            text-align: center;
-            transition: 0.3s ease-in-out;
-        }
-    
-        .form-box:hover {
-            transform: scale(1.02);
-            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
-        }
-    
-        .form-box h2 {
-            margin-bottom: 1rem;
-            color: #333;
-            font-size: 1.5rem;
-        }
-    
-        .form-box label {
-            display: block;
-            text-align: left;
-            margin: 0.6rem 0 0.3rem;
-            font-weight: bold;
-            color: #333;
-        }
-    
-        .form-box input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-            font-size: 1rem;
-            transition: 0.3s ease;
-        }
-    
-        .form-box input:focus {
-            border-color: #0066ff;
-            box-shadow: 0 0 8px rgba(0, 102, 255, 0.3);
-        }
-    
-        .form-box button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: linear-gradient(45deg, #0066ff, #004bcc);
-            color: white;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0px 4px 10px rgba(0, 102, 255, 0.3);
-        }
-    
-        .form-box button:hover {
-            background: linear-gradient(45deg, #004bcc, #002c80);
-            transform: translateY(-2px);
-            box-shadow: 0px 6px 12px rgba(0, 102, 255, 0.5);
-        }
-    
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .form-box {
-                width: 90%;
-            }
-        }
-    </style>
-    
-    {%endblock%}
+</div>
+
+{% endblock %}
+

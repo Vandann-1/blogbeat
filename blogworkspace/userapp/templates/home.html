@@ -76,6 +76,8 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
+    text-decoration: none;
+    color: inherit;
   }
 
   .course-card:hover {
@@ -96,7 +98,7 @@
     font-weight: bold;
   }
 
-  .course-desc {
+  .course-author {
     font-size: 14px;
     color: #666;
   }
@@ -127,8 +129,8 @@
       <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}'); background-size: cover;"></div>
       <div class="course-content">
         <div class="course-title">{{ blog.title }}</div>
-        <p class="course-desc">{{ blog.description }}</p>
-        <p><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+        <p class="course-author"><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+        <p class="course-author"><strong>Created on:</strong> {{ blog.created_at|date:"F d, Y" }}</p>
       </div>
     </a>
     {% endfor %}
@@ -136,4 +138,5 @@
 </div>
 
 {% endblock %}
+
 
