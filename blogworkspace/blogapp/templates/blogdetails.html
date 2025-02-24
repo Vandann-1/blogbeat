@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>{{ blog.title }}</h2>
+        <p>By {{ blog.author }} | {{ blog.created_at }}</p>
+        <p>{{ blog.content }}</p>
+
+        <!-- Save Blog Button -->
+        <form action="{% url 'save_blog' blog.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">
+                {% if blog in saved_blogs %}
+                    ✅ Saved
+                {% else %}
+                    📌 Save Blog
+                {% endif %}
+            </button>
+        </form>
+
+        <a href="{% url 'saved_blogs' %}">View Saved Blogs</a>
+    </div>
+{% endblock %}

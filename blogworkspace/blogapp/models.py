@@ -52,7 +52,18 @@ class Comment(models.Model):
 class ReplyComment(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
     replies = models.CharField(max_length=500)
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='commentss')  
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='commentss')
+    
+
+
+class SavedBlog(models.Model):   #for saved blog like insta
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    saved_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'blog')  # Prevent duplicate saves
+
     
 
 

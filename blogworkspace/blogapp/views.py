@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Blog, Comment
+from .models import Blog, Comment , SavedBlog
 from django.contrib.auth.decorators import login_required   #its basic use is that to login to auth
 # Create your views here.
 @login_required    #its means we need to login to access this view
@@ -101,7 +101,20 @@ def editpf(request):
 # COMMENT FROM NEW_FEATURE BRANCH
 from django.views import View
 
-class SaveBlogsOnPorfileView(View):
-    pass 
+# class SaveBlogsOnPorfileView(View):
+#     pass 
 
 # --03e0edededwe933933237777733332233e
+@login_required
+def save_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    SavedBlog.objects.get_or_create(user=request.user, blog=blog)  # Ensures the blog is saved
+    return redirect('blog_detail', blog_id=blog.id)  # Redirects to the blog detail page
+
+@login_required
+def saved_blogs(request):
+    saved_blogs = SavedBlog.objects.filter(user=request.user)
+    return render(request, 'savedblogs.html', {'saved_blogs': saved_blogs})
+
+
+
