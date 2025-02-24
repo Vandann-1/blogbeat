@@ -61,7 +61,8 @@
   }
 
   .course-section {
-    padding: 40px 5%;
+
+    padding: 60px 5%;
   }
 
   .course-container {
@@ -122,22 +123,23 @@
   <input type="text" id="searchBar" placeholder="Search blogs..." onkeyup="filterBlogs()">
 </div>
 
+
 <div class="course-section">
-  <h2>Top Blogs</h2>
+  <div>
+  <h3>Top Blogs</h3>
+  </div>
+
   <div class="course-container" id="blogContainer">
     {% for blog in blogs %}
     <a href="blogs/{{ blog.id }}" class="course-card">
       <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}'); background-size: cover;"></div>
       <div class="course-content">
         <div class="course-title">{{ blog.title }}</div>
-<<<<<<< HEAD
         <p class="course-author"><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
         <p class="course-author"><strong>Created on:</strong> {{ blog.created_at|date:"F d, Y" }}</p>
-=======
         <p class="course-desc">{{ blog.description }}</p>
         <p><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
         <p>Comments - {{blog.comments.all}}</p>
->>>>>>> 6171ce67a0cd7262a7bf9521bcc17bbd5d2332ae
       </div>
     </a>
     {% endfor %}

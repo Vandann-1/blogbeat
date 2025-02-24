@@ -55,6 +55,14 @@ def logoutview(request):
     return redirect("login")  # Redirect to login page after logout
 
 
+def Settings(request):
+    if request.user.is_authenticated:
+        return render(request, "settings.html")
+    return redirect("login")
+
+def helSupport(request):
+    return render(request, "help&support.html")
+
 
 
     

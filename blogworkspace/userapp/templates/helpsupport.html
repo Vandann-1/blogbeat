@@ -1,0 +1,85 @@
+{% load static %}
+<style>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Full Page Styling */
+.help-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    padding: 2rem;
+    text-align: center;
+}
+
+.help-box {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+}
+
+.help-box h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.help-box p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-links a {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: #4facfe;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact-links a:hover {
+    background: #0072ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .help-box {
+        padding: 2rem;
+    }
+}
+</style>
+
+<div class="help-container">
+    <div class="help-box">
+        <h2>Help & Support</h2>
+        <p>Welcome to BlogBeat's Help & Support page. We are here to assist you with any questions or issues you may have. Check our FAQs or reach out to us directly.</p>
+        
+        <div class="contact-links">
+            <a href="#">Visit FAQ</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Live Chat</a>
+        </div>
+    </div>
+</div>

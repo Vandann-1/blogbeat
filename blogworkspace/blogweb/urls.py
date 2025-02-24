@@ -26,8 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',register,name="register"),
     path("home",home,name="home"),
-    path("accounts/login/",loginview,name="login"),
-    path("accounts/logout/",logoutview,name="logout"),
+    path("login/",loginview,name="login"),
+    path("logout/",logoutview,name="logout"),
     path('add-blog',addblog, name='addblog'),
     path('blogs/<int:bg_id>/',viewBg, name="seeblog"),
     
@@ -38,6 +38,7 @@ urlpatterns = [
     path("re/<int:blog_id>/",is_reccuring, name="re"),
     path("profile",Userprofile,name="profile"),
     path("editprofile",editpf,name="editprofile"),
-    
+    path("helpspt",helSupport,name="helpspt"),
+    path("settings",Settings,name="settings")
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
