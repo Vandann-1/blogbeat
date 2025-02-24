@@ -61,7 +61,7 @@ def Settings(request):
     return redirect("login")
 
 def helSupport(request):
-    return render(request, "help&support.html")
+    return render(request, "helpsupport.html")
 
 
 
