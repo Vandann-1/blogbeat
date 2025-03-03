@@ -114,6 +114,11 @@
                 display: flex;
             }
         }
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -123,7 +128,7 @@
             {% if user.is_authenticated %}
                 <a href="add-blog" class="nav-link">Add Blogs</a>
                 <a href="/" class="nav-link">All Blogs</a>
-                <a href="my-blog" class="nav-link">My Blogs</a>
+
                 <div class="profile-section" onclick="toggleProfileMenu()">
                     <img src="{% static 'images/profile.jpg' %}" alt="Profile" class="profile-img">
                     <div class="profile-dropdown">

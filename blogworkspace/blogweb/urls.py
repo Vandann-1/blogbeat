@@ -39,6 +39,9 @@ urlpatterns = [
     path("profile",Userprofile,name="profile"),
     path("editprofile",editpf,name="editprofile"),
     path("helpspt",helSupport,name="helpspt"),
-    path("settings",Settings,name="settings")
+    path("settings",Settings,name="settings"),
+    path('like/<int:post_id>/', like_post, name='like_post'),
+    path('comment/<int:post_id>/', add_comment, name='add_comment'),
+
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

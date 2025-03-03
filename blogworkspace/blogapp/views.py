@@ -1,7 +1,13 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Blog, Comment , SavedBlog
+from .models import Blog, Comment , SavedBlog , BlogPost ,Comment
 from django.contrib.auth.decorators import login_required   #its basic use is that to login to auth
+
+
+
+
 # Create your views here.
+
+
 @login_required    #its means we need to login to access this view
 def addblog(request):
     if request.method == 'POST':
@@ -26,10 +32,10 @@ def addblog(request):
 @login_required
 def viewBg(request, bg_id):
     blog = get_object_or_404(Blog, id=bg_id)
-    comments=blog.comments.all()
-    print("FOUND COMMENTS:",comments)
-    print(f'foundedblog{blog}')
-    return render(request, "vb.html",{"blog": blog,'comments':comments})
+    # comments=blog.comments.all()
+    # print("FOUND COMMENTS:",comments)
+    # print(f'foundedblog{blog}')
+    return render(request, "vb.html",{"blog": blog,})
 
 
 
@@ -118,3 +124,23 @@ def saved_blogs(request):
 
 
 
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(BlogPost, id=post_id)
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        liked = False
+    else:
+        post.likes.add(request.user)
+        liked = True
+    return JsonResponse({'liked': liked, 'total_likes': post.total_likes()})
+
+@login_required
+def add_comment(request, post_id):
+    if request.method == "POST":
+        post = get_object_or_404(BlogPost, id=post_id)
+        content = request.POST.get("content")
+        if content:
+            Comment.objects.create(post=post, user=request.user, content=content)
+    return redirect('blog_post_detail', post_id=post_id)

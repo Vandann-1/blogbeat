@@ -33,16 +33,10 @@ class Profile(models.Model):
     
 #comments features crud operation    
 class Comment(models.Model):
-    user= models.ForeignKey(User,on_delete=models.CASCADE, related_name='commentsss', null=True, blank=True)
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')  #
-    comments= models.TextField()
-    Create_at = models.DateTimeField()
-    updated_at= models.DateTimeField(auto_now=True)
-    
-
-    def __str__(self):
-        return f' {self.comments}'
-
+    post = models.ForeignKey('BlogPost', on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 
@@ -63,6 +57,19 @@ class SavedBlog(models.Model):   #for saved blog like insta
 
     class Meta:
         unique_together = ('user', 'blog')  # Prevent duplicate saves
+        
+        
+        
+
+class BlogPost(models.Model):    #likes
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
+
+    def total_likes(self):
+        return self.likes.count()        
 
     
 
