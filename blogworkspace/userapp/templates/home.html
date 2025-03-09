@@ -115,6 +115,59 @@
     }
 }
 
+
+.slider-container {
+  position: relative;
+  max-width: 100%;
+  margin: 30px auto;
+  overflow: hidden;
+  height: 400px; /* Increased height for a bigger box */
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  transition: opacity 1s;
+  height: 100%; /* Full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider img {
+  width: 90%; /* Slight margin on sides */
+  height: 100%; /* Stretch to fit */
+  border-radius: 15px;
+  object-fit: cover; /* Ensures it fits well */
+}
+
+.dots {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 8px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #717171;
+  transform: scale(1.2);
+}
+
+
+
 </style>
 
 <div class="hero-section">
@@ -127,6 +180,24 @@
 <!-- Search Bar -->
 <div class="search-container">
   <input type="text" id="searchBar" placeholder="Search blogs..." onkeyup="filterBlogs()">
+</div>
+
+ <!-- slider section -->
+{%load static%}
+<h2 style="text-align: center;">Trending Blogs</h2>
+<div class="slider-container">
+    <div class="slider" id="slider">
+        <div class="slide"><a href="{% static 'img/th.jpg' %}"><img src="image1.jpg" alt="Trending Blog 1"></a></div>
+        <div class="slide"><a href="{% static 'img/m.webp' %}"><img src="image2.jpg" alt="Trending Blog 2"></a></div>
+        <div class="slide"><a href="{% static 'img/co.webp' %}"><img src="image3.jpg" alt="Trending Blog 3"></a></div>
+    </div>
+    
+
+</div>
+<div class="dots">
+    <span class="dot" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
 </div>
 
 
@@ -177,9 +248,9 @@
 
 
 
-
-<!-- Real time searchh -->
-<script>
+<!-- Real time searchh  bar-->
+ 
+ <script>
 function filterBlogs() {
   let input = document.getElementById('searchBar').value.toLowerCase();
   let blogContainer = document.getElementById('blogContainer');
@@ -196,8 +267,29 @@ function filterBlogs() {
     }
   }
 }
-</script>
+</script> 
 
+<script>
+  let slideIndex = 0;
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+
+  function showSlides() {
+      slides.forEach((slide, i) => {
+          slide.style.display = i === slideIndex ? "block" : "none";
+          dots[i].classList.toggle("active", i === slideIndex);
+      });
+      slideIndex = (slideIndex + 1) % slides.length;
+      setTimeout(showSlides, 3000);
+  }
+
+  function currentSlide(n) {
+      slideIndex = n;
+      showSlides();
+  }
+
+  showSlides();
+</script>
 
 {% endblock %}
 

@@ -1,0 +1,48 @@
+Django-5.1.5
+ pillow==11.1.0
+ mysqlclient==2.2.4
+ djangorestframework==3.15.2
+
+ <!-- Real time searchh  bar-->
+ 
+ <script>
+function filterBlogs() {
+  let input = document.getElementById('searchBar').value.toLowerCase();
+  let blogContainer = document.getElementById('blogContainer');
+  let blogs = blogContainer.getElementsByClassName('course-card');
+
+  for (let i = 0; i < blogs.length; i++) {
+    let title = blogs[i].querySelector(".course-title").textContent.toLowerCase();
+    let desc = blogs[i].querySelector(".course-desc").textContent.toLowerCase();
+    
+    if (title.includes(input) || desc.includes(input)) {
+      blogs[i].style.display = "block";
+    } else {
+      blogs[i].style.display = "none";
+    }
+  }
+}
+</script> 
+
+{% endblock %}
+
+<style>
+  .search-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  #searchBar {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  #searchBar:focus {
+    border-color: #007bff;
+  }
+</style>

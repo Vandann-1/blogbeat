@@ -15,14 +15,12 @@ class Blog(models.Model):
     is_recurring = models.BooleanField(default=False, null=True , blank=True,choices=(('Daily','daily'),('Monthly','monthly'), ('Weekly','weekly')))
     custom_choices= models.DateTimeField(null=True, blank=True)
 
-
-
     
     def __str__(self):
         return f'{self.title} - {self.user.username}'
    
     class Meta:
-        db_table="Blogs"    #to change table name in 
+        db_table="Blogs"    #to change table name in  sql table
         
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -32,6 +30,7 @@ class Profile(models.Model):
         return self.user.username
     
 #comments features crud operation    
+
 class Comment(models.Model):
     post = models.ForeignKey('BlogPost', on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)

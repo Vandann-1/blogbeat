@@ -134,14 +134,16 @@
                     <div class="profile-dropdown">
                         <p><strong>{{ user.username }}</strong></p>
                         <p>{{ user.email }}</p>
-                        <hr>
-                    
-                        <a href="my-blog">My Blogs</a>
-                        <a href="saved">My Saved</a>
-                        <a href="settings">Settings</a>
-                        <a href="profile">View Profile</a>
         
-                        <a  href="{% url 'logout' %}">Logout</a>
+                
+                        <ul>
+                            <li><a href="my-blog"><i class="fas fa-user"></i> My Blog </a></li>
+                            <li><a href="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a href="#"><i class="fas fa-credit-card"></i> saved Blog</a></li>
+                            <li><a href="logout"><i class="fas fa-sign-out"></i> logout</a></li>
+                        </ul>
+        
+    
                     </div>
                 </div>
             {% else %}
