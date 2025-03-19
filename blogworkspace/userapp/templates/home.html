@@ -116,55 +116,148 @@
 }
 
 
+/* Slider Container */
 .slider-container {
   position: relative;
-  max-width: 100%;
-  margin: 30px auto;
+  width: 90vw; /* Slightly reduced width for a balanced look */
+  max-width: 1500px; /* Prevents it from being too wide on large screens */
+  height: 450px; /* Reduced height for a sleek design */
+  margin: 50px auto;
   overflow: hidden;
-  height: 400px; /* Increased height for a bigger box */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a soft shadow for a professional touch */
 }
 
+/* Slider Track */
 .slider {
   display: flex;
+  width: 100%;
+  height: 100%;
   transition: transform 0.5s ease-in-out;
 }
 
+/* Individual Slides */
 .slide {
   min-width: 100%;
-  transition: opacity 1s;
-  height: 100%; /* Full height */
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Image Styling */
 .slider img {
-  width: 90%; /* Slight margin on sides */
-  height: 100%; /* Stretch to fit */
-  border-radius: 15px;
-  object-fit: cover; /* Ensures it fits well */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px; /* Adds rounded corners */
 }
 
+/* Dots Navigation - Initially Hidden */
 .dots {
-  text-align: center;
-  margin-top: 15px;
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  opacity: 0; /* Hide initially */
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Show dots when active class is added */
+.dots.show {
+  opacity: 1;
 }
 
 .dot {
-  height: 15px;
-  width: 15px;
-  margin: 8px;
+  height: 12px;
+  width: 12px;
   background-color: #bbb;
   border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
   cursor: pointer;
+}
+
+.dot:hover {
+  background-color: #555;
 }
 
 .active {
   background-color: #717171;
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
+.scrollable-section {
+  max-height: 500px; /* Increased scroll area */
+  overflow-y: auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  margin: 30px auto;
+  width: 90%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Styled individual blog sections */
+.scroll-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.scroll-box:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-box h3 {
+  color: #6c5ce7;
+  font-size: 22px;
+  margin-bottom: 10px;
+  border-left: 5px solid #36cef4;
+  padding-left: 12px;
+  font-weight: bold;
+}
+
+.scroll-box p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Smooth scrolling */
+.scrollable-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-section::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.scrollable-section::-webkit-scrollbar-thumb {
+  background: #6c5ce7;
+  border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scrollable-section {
+      width: 95%;
+      max-height: 400px;
+      padding: 15px;
+  }
+}
+
+
+
 
 
 
@@ -185,15 +278,22 @@
  <!-- slider section -->
 {%load static%}
 <h2 style="text-align: center;">Trending Blogs</h2>
+{% load static %}
+
 <div class="slider-container">
     <div class="slider" id="slider">
-        <div class="slide"><a href="{% static 'img/th.jpg' %}"><img src="image1.jpg" alt="Trending Blog 1"></a></div>
-        <div class="slide"><a href="{% static 'img/m.webp' %}"><img src="image2.jpg" alt="Trending Blog 2"></a></div>
-        <div class="slide"><a href="{% static 'img/co.webp' %}"><img src="image3.jpg" alt="Trending Blog 3"></a></div>
+        <div class="slide">
+            <a href="{% static 'img/th.jpg' %}"><img src="{% static 'img/th.jpg' %}" alt="Trending Blog 1"></a>
+        </div>
+        <div class="slide">
+            <a href="{% static 'img/m.webp' %}"><img src="{% static 'img/m.webp' %}" alt="Trending Blog 2"></a>
+        </div>
+        <div class="slide">
+            <a href="{% static 'img/co.webp' %}"><img src="{% static 'img/co.webp' %}" alt="Trending Blog 3"></a>
+        </div>
     </div>
-    
-
 </div>
+
 <div class="dots">
     <span class="dot" onclick="currentSlide(0)"></span>
     <span class="dot" onclick="currentSlide(1)"></span>
@@ -203,8 +303,9 @@
 
 <div class="course-section">
   <div>
-  <h3>Top Blogs</h3>
+  <h3 style="text-align: center;">Top Blogs</h3>
   </div>
+  <br> <br> <br>
 
   <div class="course-container" id="blogContainer">
     {% for blog in blogs %}
@@ -222,6 +323,35 @@
     {% endfor %}
   </div>
 </div>
+
+<div class="scrollable-section">
+  <div class="scroll-box">
+    <h3>Discuss Blog</h3>
+    <p>Join the discussion about trending blogs, share your opinions, and engage with the community.</p>
+  </div>
+  
+  <div class="scroll-box">
+    <h3>Create Blog</h3>
+    <p>Want to write your own blog? Click here to start creating amazing content!</p>
+  </div>
+
+  <div class="scroll-box">
+    <h3>Participant Blog</h3>
+    <p>Explore blogs from different participants and get inspired by their work.</p>
+  </div>
+
+  <div class="scroll-box">
+    <h3>Latest Insights</h3>
+    <p>Read the latest insights and updates from the blogging world.</p>
+  </div>
+
+  <div class="scroll-box">
+    <h3>Featured Writers</h3>
+    <p>Discover top contributors and explore their best work.</p>
+  </div>
+</div>
+
+
 
 
 
@@ -245,6 +375,7 @@
     border-color: #007bff;
   }
 </style>
+
 
 
 

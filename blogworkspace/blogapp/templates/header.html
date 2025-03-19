@@ -60,13 +60,40 @@
             font-size: large;
             font-weight: bold;
         }
+/* Profile Section Styling */
+.profile-section {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
 
-        .profile-section {
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
+/* Ensure no unwanted dots appear */
+.profile-section::before,
+.profile-section::after {
+    content: "" !important;  /* Removes any generated dots */
+    display: none !important;
+}
+
+/* Fix extra dots caused by list styles */
+.profile-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Fix dots appearing inside */
+.profile-section li::before,
+.profile-section li::after {
+    content: "" !important;
+    display: none !important;
+}
+
+/* Remove any potential list marker dots */
+.profile-section li::marker {
+    display: none !important;
+}
+
 
         .profile-img {
             width: 40px;
@@ -130,7 +157,7 @@
                 <a href="/" class="nav-link">All Blogs</a>
 
                 <div class="profile-section" onclick="toggleProfileMenu()">
-                    <img src="{% static 'images/profile.jpg' %}" alt="Profile" class="profile-img">
+                    <img src= "{% static 'img/th.jpg' %}"alt="Profile" class="profile-img">
                     <div class="profile-dropdown">
                         <p><strong>{{ user.username }}</strong></p>
                         <p>{{ user.email }}</p>
@@ -141,7 +168,7 @@
                             <li><a href="settings"><i class="fas fa-cog"></i> Settings</a></li>
                             <li><a href="#"><i class="fas fa-credit-card"></i> saved Blog</a></li>
                             <li><a href="logout"><i class="fas fa-sign-out"></i> logout</a></li>
-                        </ul>
+                        <ul>
         
     
                     </div>
