@@ -8,14 +8,12 @@
     <title>BlogBeat - Profile</title>
     <style>
         :root {
-            --primary: #0a0a0a;
-            --accent: #161d1d;
-            --text: #130404;
+            --primary: #0077b6;
+            --accent: #00b4d8;
+            --text: #ffffff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #03045e;
             --transition: all 0.3s ease-in-out;
-            --bg-light: white;
-            --bg-dark: #090c11;
-            --text-light: #130404;
-            --text-dark: #ffffff;
         }
 
         * {
@@ -27,27 +25,27 @@
 
         body {
             background: var(--bg-light);
-            color: var(--text-light);
+            color: var(--text-dark);
             transition: var(--transition);
         }
 
-        .ultra-header {
-            background: rgba(127, 208, 255, 0.95);
+        .header {
+            background: var(--bg-dark);
             padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: bold;
             text-decoration: none;
             color: var(--text);
             transition: var(--transition);
@@ -57,43 +55,28 @@
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            font-size: large;
-            font-weight: bold;
         }
-/* Profile Section Styling */
-.profile-section {
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
 
-/* Ensure no unwanted dots appear */
-.profile-section::before,
-.profile-section::after {
-    content: "" !important;  /* Removes any generated dots */
-    display: none !important;
-}
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: bold;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
 
-/* Fix extra dots caused by list styles */
-.profile-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        .nav-link:hover {
+            background: var(--accent);
+        }
 
-/* Fix dots appearing inside */
-.profile-section li::before,
-.profile-section li::after {
-    content: "" !important;
-    display: none !important;
-}
-
-/* Remove any potential list marker dots */
-.profile-section li::marker {
-    display: none !important;
-}
-
+        .profile-section {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
 
         .profile-img {
             width: 40px;
@@ -105,11 +88,11 @@
 
         .profile-dropdown {
             position: absolute;
-            top: 50px;
+            top: 60px;
             right: 0;
             background: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
+            border-radius: 8px;
             display: none;
             flex-direction: column;
             min-width: 200px;
@@ -119,7 +102,7 @@
         .profile-dropdown a {
             padding: 10px;
             text-decoration: none;
-            color: var(--text);
+            color: black;
             display: block;
             transition: var(--transition);
         }
@@ -132,45 +115,54 @@
             display: flex;
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 5%;
+                background: var(--bg-dark);
+                padding: 1rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             }
 
             .nav-links.active {
                 display: flex;
             }
-        }
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
+
+            .menu-toggle {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
-    <header class="ultra-header">
+    <header class="header">
         <a href="#" class="logo">BlogBeat</a>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav class="nav-links">
             {% if user.is_authenticated %}
                 <a href="add-blog" class="nav-link">Add Blogs</a>
                 <a href="/" class="nav-link">All Blogs</a>
 
                 <div class="profile-section" onclick="toggleProfileMenu()">
-                    <img src= "{% static 'img/th.jpg' %}"alt="Profile" class="profile-img">
+                    <img src="{% static 'img/th.jpg' %}" alt="Profile" class="profile-img">
                     <div class="profile-dropdown">
                         <p><strong>{{ user.username }}</strong></p>
                         <p>{{ user.email }}</p>
-        
-                
-                        <ul>
-                            <li><a href="my-blog"><i class="fas fa-user"></i> My Blog </a></li>
-                            <li><a href="settings"><i class="fas fa-cog"></i> Settings</a></li>
-                            <li><a href="#"><i class="fas fa-credit-card"></i> saved Blog</a></li>
-                            <li><a href="logout"><i class="fas fa-sign-out"></i> logout</a></li>
-                        <ul>
-        
-    
+                        <a href="my-blog">My Blog</a>
+                        <a href="settings">Settings</a>
+                        <a href="#">Saved Blogs</a>
+                        <a href="logout">Logout</a>
                     </div>
                 </div>
             {% else %}
@@ -183,6 +175,10 @@
     <script>
         function toggleProfileMenu() {
             document.querySelector('.profile-section').classList.toggle('active');
+        }
+
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
         }
     </script>
 </body>

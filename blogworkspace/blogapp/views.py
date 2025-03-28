@@ -125,22 +125,3 @@ def saved_blogs(request):
 
 
 
-@login_required
-def like_post(request, post_id):
-    post = get_object_or_404(BlogPost, id=post_id)
-    if post.likes.filter(id=request.user.id).exists():
-        post.likes.remove(request.user)
-        liked = False
-    else:
-        post.likes.add(request.user)
-        liked = True
-    return JsonResponse({'liked': liked, 'total_likes': post.total_likes()})
-
-@login_required
-def add_comment(request, post_id):
-    if request.method == "POST":
-        post = get_object_or_404(BlogPost, id=post_id)
-        content = request.POST.get("content")
-        if content:
-            Comment.objects.create(post=post, user=request.user, content=content)
-    return redirect('blog_post_detail', post_id=post_id)

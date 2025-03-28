@@ -15,33 +15,34 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from userapp.views import *
-from blogapp.views import *
+from django.urls import path,include
+# from userapp.views import *
+# from blogapp.views import *
+
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',register,name="register"),
-    path("home",home,name="home"),
-    path("login/",loginview,name="login"),
-    path("logout/",logoutview,name="logout"),
-    path('add-blog',addblog, name='addblog'),
-    path('blogs/<int:bg_id>/',viewBg, name="seeblog"),
+    # path('',register,name="register"),
+    # path("home",home,name="home"),
+    # path("login/",loginview,name="login"),
+    # path("logout/",logoutview,name="logout"),
+    # path('add-blog',addblog, name='addblog'),
+    # path('blogs/<int:bg_id>/',viewBg, name="seeblog"),
     
-    path('my-blog',myblog,name="myblog"),
-    path('edit_blog/<int:bg_id>/',edit_blog,name="edit_blog"),
-    path('delete_blog/<int:bg_id>/',delete_blog,name="delete_blog"),
+    # path('my-blog',myblog,name="myblog"),
+    # path('edit_blog/<int:bg_id>/',edit_blog,name="edit_blog"),
+    # path('delete_blog/<int:bg_id>/',delete_blog,name="delete_blog"),
     
-    path("re/<int:blog_id>/",is_reccuring, name="re"),
-    path("profile",Userprofile,name="profile"),
-    path("editprofile",editpf,name="editprofile"),
-    path("helpspt",helSupport,name="helpspt"),
-    path("settings",Settings,name="settings"),
-    path('like/<int:post_id>/', like_post, name='like_post'),
-    path('comment/<int:post_id>/', add_comment, name='add_comment'),
+    # path("re/<int:blog_id>/",is_reccuring, name="re"),
+    # path("profile",Userprofile,name="profile"),
+    # path("editprofile",editpf,name="editprofile"),
+    # path("helpspt",helSupport,name="helpspt"),
+    # path("settings",Settings,name="settings"),
+    path("",include("userapp.urls")),
+    path("",include("blogapp.urls"))
 
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
