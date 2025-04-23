@@ -12,5 +12,8 @@ path('delete_blog/<int:bg_id>/',delete_blog,name="delete_blog"),
 path("re/<int:blog_id>/",is_reccuring, name="re"),
 path("profile",Userprofile,name="profile"),
 path("editprofile",editpf,name="editprofile"),
+path('saved-blogs/', saved_blogs, name="saved_blogs"),
+path("save-blog/<int:blog_id>/", toggle_save_blog, name="save_blog"),
+
 
 ]

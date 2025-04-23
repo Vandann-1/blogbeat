@@ -14,26 +14,24 @@
 
   .hero-section {
     text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(135deg, #6c5ce7, #341f97);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+    padding: 50px;
+    background-color: #5a4bcf; /* Light background for contrast */
+  }
+  
+  .word {
+    display: inline-block; /* Allows for individual animations */
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px); /* Start slightly lower */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for smooth effect */
+    color: white; /* Set text color to white */
+  }
+  
+  /* Optional: Set the color of the h1 and p elements to transparent to only show the animated words */
+  .hero-section h1, .hero-section p {
+    color: transparent; /* Make the original text transparent */
+  }
 
-.hero-section h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
 
-.hero-section p {
-    font-size: 1.3rem;
-    opacity: 0.9;
-    max-width: 600px;
-}
 
 
 .search-container {
@@ -311,16 +309,52 @@
 </style>
 
 <div class="hero-section">
-  <h1>Welcome to BlogBeat</h1>
-  <p>Explore the best blogs on various topics.</p>
+  <h1 id="animated-title">Welcome to BlogBeat</h1>
+  <p id="animated-paragraph">Explore the best blogs on various topics.</p>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const title = document.getElementById("animated-title");
+    const paragraph = document.getElementById("animated-paragraph");
+  
+    // Function to wrap each word in a span
+    function wrapWords(element) {
+      const words = element.innerText.split(" ");
+      element.innerHTML = ""; // Clear the original text
+      words.forEach((word, index) => {
+        const span = document.createElement("span");
+        span.className = "word";
+        span.innerText = word; // Add the word without a trailing space
+        element.appendChild(span);
+  
+        // Add a space after each word
+        const space = document.createTextNode(" "); // Create a text node for space
+        element.appendChild(space); // Append the space after the word
+  
+        // Delay the animation for each word
+        setTimeout(() => {
+          span.style.opacity = 1; // Fade in
+          span.style.transform = "translateY(0)"; // Slide up
+        }, index * 300); // Adjust the delay as needed
+      });
+    }
+  
+    // Wrap words in title and paragraph
+    wrapWords(title);
+    wrapWords(paragraph);
+  });
+
+</script>
+
+
 
 
 
 <!-- icon of ad blog.... -->
 
 <div class="button-container">
-  <a href="/blogs" class="box-button">
+  <a href="/my-blog" class="box-button">
       <i class="fas fa-book-open"></i> My Blogs
   </a>
   <a href="/add-blog" class="box-button">
@@ -369,22 +403,62 @@
   </div>
   <br> <br> <br>
 
-  <div class="course-container" id="blogContainer">
-    {% for blog in blogs %}
-    <a href="blogs/{{ blog.id }}" class="course-card">
-      <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}'); background-size: cover;"></div>
+<!-- Blog Listing -->
+<div class="course-container" id="blogContainer">
+  {% for blog in blogs %}
+  <div class="course-card">
+      <a href="/blogs/{{ blog.id }}">
+          <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}'); background-size: cover;"></div>
+      </a>
       <div class="course-content">
-        <div class="course-title">{{ blog.title }}</div>
-        <p class="course-author"><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
-        <p class="course-author"><strong>Created on:</strong> {{ blog.created_at|date:"F d, Y" }}</p>
-        <p class="course-desc">{{ blog.description }}</p>
-        <p><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
-        <p>Comments - {{blog.comments.all}}</p>
+          <div class="course-title">{{ blog.title }}</div>
+          <p class="course-author"><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+          <p class="course-desc">{{ blog.description }}</p>
       </div>
-    </a>
-    {% endfor %}
   </div>
+  {% endfor %}
 </div>
+
+
+<script>
+    function toggleSave(blogId) {
+        fetch(`/save-blog/${blogId}/`, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            let btn = document.getElementById(`save-btn-${blogId}`);
+            if (data.saved) {
+                btn.innerHTML = "✅ Saved";
+            } else {
+                btn.innerHTML = "💾 Save";
+            }
+        });
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie) {
+            const cookies = document.cookie.split(';');
+            cookies.forEach(cookie => {
+                cookie = cookie.trim();
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = cookie.substring(name.length + 1);
+                }
+            });
+        }
+        return cookieValue;
+    }
+</script>
+
+
+  
+
+
 
 <div class="section-container">
   <div class="scroll-box featured-post">
@@ -501,6 +575,9 @@ function filterBlogs() {
 
   showSlides();
 </script>
+
+
+
 
 {% endblock %}
 

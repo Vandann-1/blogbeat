@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Blog, Comment , SavedBlog , BlogPost ,Comment
+from .models import Blog , Savedblog
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required   #its basic use is that to login to auth
 
 
@@ -111,17 +112,52 @@ from django.views import View
 #     pass 
 
 # --03e0edededwe933933237777733332233e
-@login_required
-def save_blog(request, blog_id):
-    blog = get_object_or_404(Blog, id=blog_id)
-    SavedBlog.objects.get_or_create(user=request.user, blog=blog)  # Ensures the blog is saved
-    return redirect('blog_detail', blog_id=blog.id)  # Redirects to the blog detail page
 
+
+
+# for savedblog =============================================
+@login_required
+def toggle_save_blog(request, blog_id):
+    """Save or Unsave a blog post"""
+    blog = get_object_or_404(Blog, id=blog_id)
+    
+    # if request.user in blog.saved_by.all():
+    if Savedblog.objects.filter(user=request.user,blog =blog).exists():
+
+        Savedblog.objects.filter(user=request.user,blog =blog).delete()
+        
+        
+        print(f" Unsaved: {blog.title} by {request.user}")  # Debugging
+        return JsonResponse({"message": "Blog unsaved", "saved": False})
+    else:
+        # blog.saved_by.add(request.user)
+        Savedblog.objects.create(user=request.user, blog=blog)
+        
+        print(f" Saved: {blog.title} by {request.user}")  # Debugging
+        return JsonResponse({"message": "Blog saved", "saved": True})
+
+
+#  View for rendering the Saved Blogs Page
 @login_required
 def saved_blogs(request):
-    saved_blogs = SavedBlog.objects.filter(user=request.user)
-    return render(request, 'savedblogs.html', {'saved_blogs': saved_blogs})
+    pass
+    # saved_blogs = request.user.saved_blogs.all()  # Check if this returns blogs
+    # print("Saved Blogs:", saved_blogs)  
 
+    # if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+    #     data = {
+    #         "saved_blogs": [
+    #             {
+    #                 "id": blog.id,
+    #                 "title": blog.title,
+    #                 "description": blog.description,
+    #                 "image_url": blog.blog_image.url if blog.blog_image else "",
+    #                 "author": f"{blog.user.first_name} {blog.user.last_name}",
+    #             }
+    #             for blog in saved_blogs
+    #         ]
+    #     }
+    #     return JsonResponse(data)
 
-
-
+    # return render(request, "saved_blogs.html", {"blogs": saved_blogs})
+    

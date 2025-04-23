@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User   # Import User model from Django's auth module
-from blogapp.models import Blog,Profile,Comment,ReplyComment
+from blogapp.models import Blog
 from django.contrib import messages
 
 
@@ -27,6 +27,10 @@ def register(request):
 
 def home(request):
     blogs = Blog.objects.all()
+    
+    # Attach 'is_saved' attribute for each blog
+    # for blog in blogs:
+        # blog.is_saved = request.user.is_authenticated and blog.saved_by.filter(id=request.user.id).exists()
     return render(request, "home.html", {"blogs": blogs})
 
 
