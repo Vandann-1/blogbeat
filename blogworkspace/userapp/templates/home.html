@@ -701,7 +701,7 @@
       <!-- Like Button -->
       <div class="course-actions">
         <button class="like-btn" onclick="toggleLike({{ blog.id }})" id="like-btn-{{ blog.id }}">
-          {% if user in blog.likes.all %}
+                    {% if user in blog.likes.all %}
             ❤️ Unlike
           {% else %}
             🤍 Like

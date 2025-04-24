@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlogBeat - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#1a2a3a] text-white">
+  <!-- Header -->
+  <header class="flex justify-between items-center px-8 py-4 bg-[#1a2a3a]">
+    <div class="text-2xl font-bold text-yellow-400">BlogBeat</div>
+    <nav class="space-x-6 text-white text-sm">
+      <a href="/" class="hover:text-yellow-400">Home</a>
+      <a href="/services" class="hover:text-yellow-400">Services</a>
+      <a href="/register" class="hover:text-yellow-400">Register</a>
+      <a href="/login" class="hover:text-yellow-400">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="flex flex-col-reverse lg:flex-row items-center justify-between px-8 lg:px-20 py-16">
+    <!-- Left Content -->
+    <div class="lg:w-1/2 text-center lg:text-left">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+        Write. Read. Share.
+        <br>
+        <span class="text-yellow-400">On BlogBeat</span> – Your Personal Blog Hub
+      </h1>
+      <p class="text-gray-300 mt-4 max-w-md">
+        Join thousands of thinkers, writers, and readers building ideas through words. Publish your own blogs and explore content that truly matters.
+      </p>
+      <div class="mt-6 space-x-4">
+        <a href="/create-blog" class="inline-block bg-yellow-400 text-[#1a2a3a] font-semibold px-6 py-2 rounded-full hover:bg-yellow-300">Start Writing</a>
+        <a href="/blogs" class="inline-block bg-transparent border border-yellow-400 text-yellow-400 font-semibold px-6 py-2 rounded-full hover:bg-yellow-400 hover:text-[#1a2a3a]">Explore Blogs</a>
+      </div>
+    </div>
+
+    <!-- Right Image -->
+    <div class="lg:w-1/2 mb-12 lg:mb-0">
+      <div class="rounded-full overflow-hidden w-72 h-72 mx-auto shadow-lg border-4 border-yellow-400">
+        <img src="https://th.bing.com/th/id/OIP.6C6hSVMFU_SRBC-kx6srmwHaE8?w=1000&h=667&rs=1&pid=ImgDetMain" alt="Blogger" class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </section>
+</body>
+</html>

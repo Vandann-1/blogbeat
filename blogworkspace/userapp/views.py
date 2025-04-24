@@ -67,6 +67,10 @@ def Settings(request):
 def helSupport(request):
     return render(request, "helpsupport.html")
 
+def hh(request):
+    return render (request, "h.html")
+    
+
 
 
     
