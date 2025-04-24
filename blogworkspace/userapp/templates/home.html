@@ -2,13 +2,27 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% block content %}
 <br><br><br>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ✅ BODY + BACKGROUND */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f8f9fb, #eef1f6);
+    color: #1a1a1a;
+  }
+</style>  
+
+
+
 <style>
   /* Homepage inspired by Udemy */
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #ffffff;
+    background: hsl(0, 0%, 98%);
     color: #333;
   }
 
@@ -72,60 +86,117 @@
   transform: scale(1.1);
 }
 
-  .course-section {
+.course-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 30px;
+  justify-content: center;
+}
 
-    padding: 60px 5%;
-  }
+.course-card {
+  width: 320px; /* was 280px */
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgb(249, 247, 247);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
 
+.course-img {
+  width: 100%;
+  height: 200px; /* was 170px */
+  background-size: cover;
+  background-position: center;
+}
+
+.course-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.course-author {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.course-desc {
+  font-size: 0.85rem;
+  color: #444;
+  min-height: 40px;
+}
+
+.course-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.like-count {
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.comment-preview {
+  font-size: 0.8rem;
+  color: #333;
+  background: #f7f7f7;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.comment-form input {
+  width: 80%;
+  padding: 6px;
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.comment-form button {
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-msg {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
   .course-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 16px;
   }
 
   .course-card {
-    background: #f8f8f8;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    text-decoration: none;
-    color: inherit;
+    width: 90%;
   }
+}
 
-  .course-card:hover {
-    transform: scale(1.05);
+@media (max-width: 480px) {
+  .course-card {
+    width: 100%;
+    border-radius: 12px;
   }
 
   .course-img {
-    height: 150px;
-    background: #ddd;
+    height: 160px;
   }
-
-  .course-content {
-    padding: 15px;
-  }
-
-  .course-title {
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .course-author {
-    font-size: 14px;
-    color: #666;
-  }
-
-  @media (max-width: 768px) {
-    .search-input {
-      width: 80%;
-    }
-  }
-  @media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
 }
+
+
 
 
 /* Slider Container */
@@ -212,47 +283,67 @@
   width: 90%;
 }
 
-.scroll-box {
-  background: #fff;
-  border-radius: 10px;
-  padding: 30px; /* Increased padding for larger boxes */
-  margin-bottom: 20px; /* Space between boxes */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 40px 20px;
+  background-color: #f5f7ff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.info-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.info-card h3 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 12px;
   display: flex;
-  align-items: center; /* Center icon and text vertically */
+  align-items: center;
+  gap: 10px;
 }
 
-.scroll-box:hover {
-  transform: scale(1.02); /* Slightly enlarge on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.info-card p {
+  font-size: 1rem;
+  color: #555;
 }
 
-.scroll-box h3 {
-  margin: 0; /* Remove default margin */
-  font-size: 24px; /* Increase font size */
-  display: flex;
-  align-items: center; /* Center icon and text vertically */
+.call-to-action {
+  background: #eef2ff;
+  border: 2px solid #6200ea;
 }
 
-.scroll-box h3 i {
-  margin-right: 10px; /* Space between icon and text */
-  font-size: 28px; /* Icon size */
+.call-to-action h3 {
+  color: #4b00b5;
 }
 
-.call-to-action .cta-button {
-  padding: 10px 15px;
-  background: #6c5ce7; /* Button background */
-  color: #fff; /* Button text color */
-  border: none;
-  border-radius: 5px;
-  text-decoration: none; /* Remove underline */
-  transition: background 0.3s;
+.cta-button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #6200ea;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
-.call-to-action .cta-button:hover {
-  background: #5a4bcf; /* Darker shade on hover */
+.cta-button:hover {
+  background-color: #4b00b5;
 }
+
 
 
 
@@ -303,6 +394,167 @@
 
 
 
+.automation-section {
+  padding: 60px 20px;
+  background-color: gold;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.automation-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.automation-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  flex: 1 1 480px;
+}
+
+.text h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1e1e1e;
+}
+
+.text p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+.features {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 24px;
+}
+
+.features li {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #444;
+  transition: transform 0.3s ease;
+}
+
+.features li.hovered {
+  transform: scale(1.05);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #6a0dad;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #540ba4;
+}
+
+.image {
+  flex: 1 1 500px;
+}
+
+.image img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .automation-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text, .image {
+    flex: 1 1 100%;
+  }
+}
+
+
+.report-section {
+  background-color: #f9f9ff;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.report-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.text h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.text p {
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background-color: #6200ea;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color: #4b00b5;
+}
+
+.image {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  background: #fff;
+}
+
 
 
 
@@ -351,7 +603,7 @@
 
 
 
-<!-- icon of ad blog.... -->
+<!-- icon of ad blog....
 
 <div class="button-container">
   <a href="/my-blog" class="box-button">
@@ -363,23 +615,24 @@
   <a href="#" class="box-button">
     <i class="fas fa-comments"></i> livechat
   </a>
-</div>
+</div> -->
 
 
-<!-- Search Bar -->
+<!-- Search Bar
 <div class="search-container">
   <input type="text" id="searchBar" placeholder="Search blogs..." onkeyup="filterBlogs()">
-</div>
+</div> -->
 
  <!-- slider section -->
 {%load static%}
+<br> <br>
 <h2 style="text-align: center;">Trending Blogs</h2>
 {% load static %}
 
 <div class="slider-container">
     <div class="slider" id="slider">
         <div class="slide">
-            <a href="{% static 'img/th.jpg' %}"><img src="{% static 'img/th.jpg' %}" alt="Trending Blog 1"></a>
+            <a href="{% static 'img/W.webp' %}"><img src="{% static 'img/W.webp' %}" alt="Trending Blog 1"></a>
         </div>
         <div class="slide">
             <a href="{% static 'img/m.webp' %}"><img src="{% static 'img/m.webp' %}" alt="Trending Blog 2"></a>
@@ -397,109 +650,165 @@
 </div>
 
 
+<!-- <div class="course-section">
+  <div>
+  <h3 style="text-align: center;">Top Blogs</h3>
+  </div>
+  <br> <br> <br> -->
+
+
+  <!-- Search Bar -->
+<div class="search-container">
+  <input type="text" id="searchBar" placeholder="Search blogs..." onkeyup="filterBlogs()">
+</div>
+
+
+<!-- icon of ad blog.... -->
+
+<div class="button-container">
+  <a href="/my-blog" class="box-button">
+      <i class="fas fa-book-open"></i> My Blogs
+  </a>
+  <a href="/add-blog" class="box-button">
+      <i class="fas fa-plus"></i> Add Blog
+  </a>
+  <a href="#" class="box-button">
+    <i class="fas fa-comments"></i> livechat
+  </a>
+</div>
+
+
 <div class="course-section">
   <div>
   <h3 style="text-align: center;">Top Blogs</h3>
   </div>
-  <br> <br> <br>
+  <br> <br> 
 
 <!-- Blog Listing -->
-<div class="course-container" id="blogContainer">
+<div class="course-container">
   {% for blog in blogs %}
   <div class="course-card">
-      <a href="/blogs/{{ blog.id }}">
-          <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}'); background-size: cover;"></div>
-      </a>
-      <div class="course-content">
-          <div class="course-title">{{ blog.title }}</div>
-          <p class="course-author"><strong>By:</strong> {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
-          <p class="course-desc">{{ blog.description }}</p>
+    <a href="/blogs/{{ blog.id }}/" style="text-decoration: none; color: inherit;">
+
+      <div class="course-img" style="background-image: url('{{ blog.blog_image.url }}');"></div>
+    </a>
+
+    <div class="course-content">
+      <h3 class="course-title">{{ blog.title }}</h3>
+      <p class="course-author">By: {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+      <p class="course-desc">{{ blog.description|truncatewords:20 }}</p>
+
+      <!-- Like Button -->
+      <div class="course-actions">
+        <button class="like-btn" onclick="toggleLike({{ blog.id }})" id="like-btn-{{ blog.id }}">
+          {% if user in blog.likes.all %}
+            ❤️ Unlike
+          {% else %}
+            🤍 Like
+          {% endif %}
+        </button>
+        <span class="like-count">({{ blog.likes.count }})</span>
       </div>
+
+      <!-- Latest comment -->
+      {% if blog.comments.last %}
+        <div class="comment-preview">
+          <strong>{{ blog.comments.last.user.username }}</strong>: 
+          {{ blog.comments.last.content|truncatewords:10 }}
+          <br><small>{{ blog.comments.last.timestamp }}</small>
+        </div>
+      {% endif %}
+
+      <!-- Comment form -->
+      {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'add_comment' blog.id %}" class="comment-form">
+          {% csrf_token %}
+          <input type="text" name="content" placeholder="Write a comment..." required />
+          <button type="submit">💬</button>
+        </form>
+      {% else %}
+        <p class="login-msg"><a href="{% url 'login' %}">Login</a> to comment</p>
+      {% endif %}
+    </div>
   </div>
   {% endfor %}
 </div>
 
 
+<!-- Save Button Script -->
 <script>
-    function toggleSave(blogId) {
-        fetch(`/save-blog/${blogId}/`, {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": getCookie("csrftoken"),
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            let btn = document.getElementById(`save-btn-${blogId}`);
-            if (data.saved) {
-                btn.innerHTML = "✅ Saved";
-            } else {
-                btn.innerHTML = "💾 Save";
-            }
-        });
-    }
+  function toggleLike(blogId) {
+      fetch(`/blog/${blogId}/like/`, {
+          method: "POST",
+          headers: {
+              "X-CSRFToken": getCookie("csrftoken"),
+              "Content-Type": "application/json"
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          const btn = document.getElementById(`like-btn-${blogId}`);
+          const count = document.getElementById(`like-count-${blogId}`);
 
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie) {
-            const cookies = document.cookie.split(';');
-            cookies.forEach(cookie => {
-                cookie = cookie.trim();
-                if (cookie.startsWith(name + '=')) {
-                    cookieValue = cookie.substring(name.length + 1);
-                }
-            });
-        }
-        return cookieValue;
-    }
+          btn.innerHTML = data.liked ? "❤️ Unlike" : "🤍 Like";
+          count.innerHTML = `(${data.like_count})`;
+      });
+  }
+
+  function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(';');
+          for (let cookie of cookies) {
+              cookie = cookie.trim();
+              if (cookie.startsWith(name + "=")) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
 </script>
 
 
-  
 
-
-
-<div class="section-container">
-  <div class="scroll-box featured-post">
-    <h3><i class="fas fa-star"></i> Featured Post</h3>
-    <p><strong>Title:</strong> The Future of Blogging</p>
-    <p><strong>Author:</strong> Jane Doe</p>
-    <p>Discover the latest trends in blogging and how to stay ahead in the digital landscape. <a href="/featured-post" class="read-more">Read More</a></p>
+<section class="report-section">
+  <div class="report-content">
+    <div class="text">
+      <h2>Top trends for the future of blogs</h2>
+      <p>Our 2025 BlogBeat Insights Report is here! Discover the trends and strategies shaping content creation in the next era.</p>
+      <a href="#" class="btn">Get the report →</a>
+    </div>
+    <div class="image">
+      <img src="https://img.freepik.com/premium-vector/blogging-report_894471-268.jpg" alt="BlogBeat Report Preview" />
+    </div>
   </div>
+</section>
+
+
+
+
+
+
+
+
+
+
   
-  <div class="scroll-box">
+<div class="info-grid">
+  <div class="info-card">
     <h3><i class="fas fa-comments"></i> Discuss Blog</h3>
     <p>Join the discussion about trending blogs, share your opinions, and engage with the community.</p>
   </div>
-  
-  <div class="scroll-box">
-    <h3><i class="fas fa-pencil-alt"></i> Create Blog</h3>
-    <p>Want to write your own blog? Click here to start creating amazing content!</p>
-  </div>
 
-  <div class="scroll-box">
-    <h3><i class="fas fa-users"></i> Participant Blog</h3>
-    <p>Explore blogs from different participants and get inspired by their work.</p>
-  </div>
 
-  <div class="scroll-box">
-    <h3><i class="fas fa-lightbulb"></i> Latest Insights</h3>
-    <p>Read the latest insights and updates from the blogging world.</p>
-  </div>
-
-  <div class="scroll-box">
+  <div class="info-card">
     <h3><i class="fas fa-user-edit"></i> Featured Writers</h3>
     <p>Discover top contributors and explore their best work.</p>
   </div>
 
-  <div class="scroll-box testimonial">
-    <h3><i class="fas fa-quote-left"></i> User Testimonials</h3>
-    <p>"BlogBeat has transformed my writing experience! The community is supportive, and I love sharing my thoughts." - Alex Smith</p>
-    <!-- <p>"A fantastic platform for bloggers! I found my voice here." - Sarah Johnson</p> -->
-  </div>
-
-  <div class="scroll-box call-to-action">
+  <div class="info-card call-to-action">
     <h3><i class="fas fa-user-plus"></i> Join Us Today!</h3>
     <p>Become a part of the BlogBeat community. Share your stories, connect with others, and grow your audience!</p>
     <a href="https://chat.whatsapp.com/KTl8UAdWkgjGpzaOrd3elA" class="cta-button" target="_blank" rel="noopener noreferrer">Join Now</a>
@@ -575,6 +884,60 @@ function filterBlogs() {
 
   showSlides();
 </script>
+
+
+<section class="automation-section" id="automationFeatures">
+  <div class="automation-content">
+    <div class="text">
+      <h2>Explore Automation Features</h2>
+      <p>Our AI-enhanced workflows are coming to BlogBeat! Get ready for one-click publishing, SEO boosts, and intelligent content planning – all automated.</p>
+      <ul class="features">
+        <li>✨ One-click auto-publishing</li>
+        <li>🤖 Smart SEO suggestions</li>
+        <li>🗓️ AI-powered content planner</li>
+      </ul>
+      <a href="#" class="btn">See what's coming →</a>
+    </div>
+    <div class="image">
+      <img src="https://assets-global.website-files.com/5c7d318eeaea1d6e1198d906/628d4fd4695fe61100f4c7ba_CTA-Announcement.png" alt="Upcoming Automation" />
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const section = document.getElementById('automationFeatures');
+  observer.observe(section);
+
+  // Hover effects
+  const features = document.querySelectorAll('.features li');
+  features.forEach(item => {
+    item.addEventListener('mouseover', () => item.classList.add('hovered'));
+    item.addEventListener('mouseout', () => item.classList.remove('hovered'));
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

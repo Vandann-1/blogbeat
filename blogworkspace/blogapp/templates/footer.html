@@ -1,9 +1,10 @@
 <!-- FOOTER STYLES -->
+
 <style>
     .mini-footer {
-        background: var(--bg-dark); /* Same as header */
-        color: var(--text); /* Text color */
-        padding: 15px 4%;
+        background: var(--bg-dark); 
+        color: var(--text);
+        padding: 10px 2%;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.12);
         text-align: center;
@@ -16,13 +17,14 @@
         max-width: 1024px;
         margin: 0 auto;
         flex-wrap: wrap;
+        gap: 8px; 
     }
 
     .footer-logo {
         font-size: 1.2rem;
         font-weight: bold;
         text-decoration: none;
-        color: var(--text); /* Text color */
+        color: var(--text);
     }
 
     .footer-links {
@@ -33,19 +35,15 @@
         margin: 0;
     }
 
-    .footer-links li {
-        display: inline;
-    }
-
     .footer-links a {
-        color: var(--text); /* Text color */
+        color: var(--text);
         text-decoration: none;
         font-size: 0.9rem;
         transition: 0.3s;
     }
 
     .footer-links a:hover {
-        color: var(--accent); /* Accent color on hover */
+        color: var(--accent); 
     }
 
     .social-links {
@@ -54,25 +52,23 @@
     }
 
     .social-links a {
-        color: var(--text); /* Text color */
+        color: var(--text); 
         font-size: 35px;
-        font-weight: bold;
         transition: 0.3s ease;
     }
 
     .social-links a:hover {
-        color: var(--accent); /* Accent color on hover */
+        color: var(--accent); 
     }
 
     .footer-bottom {
         font-size: 0.8rem;
-        margin-top: 10px;
+        margin-top: 5px; 
     }
 
     @media (max-width: 768px) {
         .footer-content {
             flex-direction: column;
-            gap: 8px;
             text-align: center;
         }
     }
@@ -94,7 +90,7 @@
     </div>
 
     <div class="footer-bottom">
-        <p>© 2024 BlogBeat. All rights reserved.  | <a href="#">Django Project</a></p>
+        <p>© 2024 BlogBeat. All rights reserved. | <a href="#">Django Project</a></p>
         <p>Made by Vandan's limited</p>
     </div>
 </footer>

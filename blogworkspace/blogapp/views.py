@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Blog , Savedblog
+from .models import Blog ,  Comment
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required   #its basic use is that to login to auth
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 
 
@@ -118,23 +121,24 @@ from django.views import View
 # for savedblog =============================================
 @login_required
 def toggle_save_blog(request, blog_id):
-    """Save or Unsave a blog post"""
-    blog = get_object_or_404(Blog, id=blog_id)
+    pass
+    # """Save or Unsave a blog post"""
+    # blog = get_object_or_404(Blog, id=blog_id)
     
-    # if request.user in blog.saved_by.all():
-    if Savedblog.objects.filter(user=request.user,blog =blog).exists():
+    # # if request.user in blog.saved_by.all():
+    # if Savedblog.objects.filter(user=request.user,blog =blog).exists():
 
-        Savedblog.objects.filter(user=request.user,blog =blog).delete()
+    #     Savedblog.objects.filter(user=request.user,blog =blog).delete()
         
         
-        print(f" Unsaved: {blog.title} by {request.user}")  # Debugging
-        return JsonResponse({"message": "Blog unsaved", "saved": False})
-    else:
-        # blog.saved_by.add(request.user)
-        Savedblog.objects.create(user=request.user, blog=blog)
+    #     print(f" Unsaved: {blog.title} by {request.user}")  # Debugging
+    #     return JsonResponse({"message": "Blog unsaved", "saved": False})
+    # else:
+    #     # blog.saved_by.add(request.user)
+    #     Savedblog.objects.create(user=request.user, blog=blog)
         
-        print(f" Saved: {blog.title} by {request.user}")  # Debugging
-        return JsonResponse({"message": "Blog saved", "saved": True})
+    #     print(f" Saved: {blog.title} by {request.user}")  # Debugging
+    #     return JsonResponse({"message": "Blog saved", "saved": True})
 
 
 #  View for rendering the Saved Blogs Page
@@ -161,3 +165,44 @@ def saved_blogs(request):
 
     # return render(request, "saved_blogs.html", {"blogs": saved_blogs})
     
+from django.http import JsonResponse
+from .models import Blog
+
+@login_required
+def like_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    liked = False
+
+    if request.user in blog.likes.all():
+        blog.likes.remove(request.user)
+        liked = False
+    else:
+        blog.likes.add(request.user)
+        liked = True
+
+    return JsonResponse({
+        'liked': liked,
+        'like_count': blog.likes.count()
+    })
+
+
+@login_required
+def add_comment(request, blog_id):
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        blog = Blog.objects.get(id=blog_id)
+        Comment.objects.create(blog=blog, content=content, user=request.user)
+        return redirect('blog_detail', blog_id=blog_id)  # Redirect to the blog detail page
+
+
+
+def blog_detail(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    
+    # Checks if the current user has already liked the blog
+    user_has_liked = blog.likes.filter(user=request.user).exists()
+
+    return render(request, 'blogdetails.html', {
+        'blog': blog,
+        'user_has_liked': user_has_liked,
+    })
