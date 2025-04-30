@@ -42,7 +42,8 @@ urlpatterns = [
     # path("helpspt",helSupport,name="helpspt"),
     # path("settings",Settings,name="settings"),
     path("",include("userapp.urls")),
-    path("",include("blogapp.urls"))
+    path("",include("blogapp.urls")),
+
 
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

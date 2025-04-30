@@ -68,8 +68,9 @@ def helSupport(request):
     return render(request, "helpsupport.html")
 
 def hh(request):
-    return render (request, "h.html")
-    
+    if request.user.is_authenticated:
+        return redirect('home')
+    return render(request, "h.html")    
 
 
 

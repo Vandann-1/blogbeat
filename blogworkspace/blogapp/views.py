@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Blog ,  Comment
+from .models import Blog ,  Comment , Savedblog
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required   #its basic use is that to login to auth
 from django.http import HttpResponseRedirect
@@ -90,9 +90,12 @@ def is_reccuring(request,blog_id):
     return render(request,"is_recc.html",{'blog':blog})
 
 
+
+
 def Userprofile(request):
-    blogs=Blog.objects.filter(user=request.user).order_by("create_at")
+    blogs=Blog.objects.filter(user=request.user).order_by("created_at")
     return render(request, 'profile.html',{"blogs":blogs})
+
 
 @login_required
 def editpf(request):
@@ -111,62 +114,16 @@ def editpf(request):
 # COMMENT FROM NEW_FEATURE BRANCH
 from django.views import View
 
-# class SaveBlogsOnPorfileView(View):
-#     pass 
-
-# --03e0edededwe933933237777733332233e
 
 
 
-# for savedblog =============================================
-@login_required
-def toggle_save_blog(request, blog_id):
-    pass
-    # """Save or Unsave a blog post"""
-    # blog = get_object_or_404(Blog, id=blog_id)
-    
-    # # if request.user in blog.saved_by.all():
-    # if Savedblog.objects.filter(user=request.user,blog =blog).exists():
 
-    #     Savedblog.objects.filter(user=request.user,blog =blog).delete()
-        
-        
-    #     print(f" Unsaved: {blog.title} by {request.user}")  # Debugging
-    #     return JsonResponse({"message": "Blog unsaved", "saved": False})
-    # else:
-    #     # blog.saved_by.add(request.user)
-    #     Savedblog.objects.create(user=request.user, blog=blog)
-        
-    #     print(f" Saved: {blog.title} by {request.user}")  # Debugging
-    #     return JsonResponse({"message": "Blog saved", "saved": True})
-
-
-#  View for rendering the Saved Blogs Page
-@login_required
-def saved_blogs(request):
-    pass
-    # saved_blogs = request.user.saved_blogs.all()  # Check if this returns blogs
-    # print("Saved Blogs:", saved_blogs)  
-
-    # if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-    #     data = {
-    #         "saved_blogs": [
-    #             {
-    #                 "id": blog.id,
-    #                 "title": blog.title,
-    #                 "description": blog.description,
-    #                 "image_url": blog.blog_image.url if blog.blog_image else "",
-    #                 "author": f"{blog.user.first_name} {blog.user.last_name}",
-    #             }
-    #             for blog in saved_blogs
-    #         ]
-    #     }
-    #     return JsonResponse(data)
-
-    # return render(request, "saved_blogs.html", {"blogs": saved_blogs})
     
 from django.http import JsonResponse
 from .models import Blog
+
+
+
 
 @login_required
 def like_blog(request, blog_id):
@@ -192,8 +149,7 @@ def add_comment(request, blog_id):
         content = request.POST.get('content')
         blog = Blog.objects.get(id=blog_id)
         Comment.objects.create(blog=blog, content=content, user=request.user)
-        return redirect('blog_detail', blog_id=blog_id)  # Redirect to the blog detail page
-
+        return JsonResponse({'success': True})
 
 
 def blog_detail(request, blog_id):
@@ -206,3 +162,51 @@ def blog_detail(request, blog_id):
         'blog': blog,
         'user_has_liked': user_has_liked,
     })
+
+
+def savedblog(request, blog_id):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden('Unauthorized Access')
+
+    blog = get_object_or_404(Blog, id=blog_id)
+    Savedblog.objects.create(blog=blog, user=request.user)
+    return redirect('home')    
+ 
+@login_required
+def saved_blogs_view(request):
+    
+    saved_blogs = Savedblog.objects.filter(user=request.user).order_by('-timestamp')  # ✅ Correct
+    return render(request, 'savebg.html', {'saved_blogs': saved_blogs})
+
+@login_required
+def remove_saved_blog(request, blog_id):
+    blog = get_object_or_404(Savedblog, id=blog_id, user=request.user)
+    blog.delete()
+    return redirect('saved_blogs')        
+
+
+# views.py
+import openai
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+openai.api_key = "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"  # Replace this with your key
+
+@csrf_exempt
+def ai_chat(request):
+    if request.method == "POST":
+        try:
+            body = json.loads(request.body)
+            user_msg = body.get("message", "")
+
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": user_msg}]
+            )
+
+            reply = response.choices[0].message.content.strip()
+            return JsonResponse({"reply": reply})
+        except Exception as e:
+            return JsonResponse({"reply": "Oops! Something went wrong."})
+    return JsonResponse({"reply": "Invalid request."})

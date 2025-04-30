@@ -1,0 +1,132 @@
+<!-- saved_blogs.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Saved Blogs | BlogBeat</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f8ff;
+    }
+
+    .saved-blogs-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .saved-blogs-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #222;
+    }
+
+    .blog-card {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .blog-thumbnail {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    .blog-content {
+      flex-grow: 1;
+    }
+
+    .blog-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .blog-description {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .blog-meta {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #999;
+    }
+
+    .remove-btn {
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .remove-btn:hover {
+      background-color: #d9363e;
+    }
+
+    @media (max-width: 768px) {
+      .blog-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .blog-thumbnail {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .remove-btn {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="saved-blogs-container">
+    <div class="saved-blogs-title">📚 Your Saved Blogs</div>
+
+    {% for blog in saved_blogs %}
+    <div class="blog-card">
+      <img src="{{ blog.thumbnail.url }}" alt="Blog Image" class="blog-thumbnail">
+      <div class="blog-content">
+        <div class="blog-title">{{ blog.title }}</div>
+        <div class="blog-description">{{ blog.short_description|truncatewords:25 }}</div>
+        <div class="blog-meta">Saved on {{ blog.date_saved|date:"F j, Y" }}</div>
+      </div>
+      <form method="POST" action="{% url 'remove_saved_blog' blog.id %}">
+        {% csrf_token %}
+        <button type="submit" class="remove-btn">Remove</button>
+      </form>
+    </div>
+    {% empty %}
+    <p style="text-align:center; color:#555;">You haven’t saved any blogs yet.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>

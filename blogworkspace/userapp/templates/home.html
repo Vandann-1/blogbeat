@@ -360,7 +360,7 @@
   padding: 15px 25px; /* Increased padding for a boxy look */
   margin: 0 10px; /* Space between buttons */
   border: none;
-  background: #6c5ce7; /* Updated background color */
+  background: #6200ea; /* Updated background color */
   color: #fff; /* Text color */
   font-size: 18px; /* Font size */
   border-radius: 8px; /* Rounded corners */
@@ -698,7 +698,10 @@
       <p class="course-author">By: {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
       <p class="course-desc">{{ blog.description|truncatewords:20 }}</p>
 
-      <!-- Like Button -->
+      <a href="{%url 'save-blog' blog_id=blog.id%}">
+        <button>Save Blog</button>
+      </a>
+            <!-- Like Button -->
       <div class="course-actions">
         <button class="like-btn" onclick="toggleLike({{ blog.id }})" id="like-btn-{{ blog.id }}">
                     {% if user in blog.likes.all %}
@@ -711,13 +714,19 @@
       </div>
 
       <!-- Latest comment -->
-      {% if blog.comments.last %}
-        <div class="comment-preview">
-          <strong>{{ blog.comments.last.user.username }}</strong>: 
-          {{ blog.comments.last.content|truncatewords:10 }}
-          <br><small>{{ blog.comments.last.timestamp }}</small>
-        </div>
-      {% endif %}
+      {% if blog.comments.all %}
+      <div class="comment-preview">
+        <section>
+          {% for comment in blog.comments.all %}
+            <div class="comment-item">
+              <strong>{{ comment.user.username }}</strong>
+              <p>{{ comment.content }}</p>
+            </div>
+          {% endfor %}
+        </section>
+      </div>
+    {% endif %}
+
 
       <!-- Comment form -->
       {% if user.is_authenticated %}

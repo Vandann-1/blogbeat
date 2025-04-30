@@ -10,7 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+# from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = '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'
+DEBUG = True
+ALLOWED_HOSTS = []
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +50,7 @@ INSTALLED_APPS = [
     'userapp',
     'blogapp',
     'django_cron',
+    'corsheaders',      
 
 ]
 
@@ -72,16 +82,19 @@ INSTALLED_APPS = [
 #     },
 # }
 
-
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',                 # 💡 Add this at the very top (if using CORS)
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',             # 🔒 Keeps CSRF protection
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = 'blogweb.urls'
 

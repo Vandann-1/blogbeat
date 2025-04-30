@@ -44,6 +44,8 @@ class Blog(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pics/', default='default.jpg')
+    create_at = models.DateTimeField(default=timezone.now) 
+
 
     def __str__(self):
         return self.user.username
@@ -57,13 +59,7 @@ class Profile(models.Model):
  
  
         
-#profile 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='profile_pics/', default='default.jpg')
 
-    def __str__(self):
-        return self.user.username
     
 
 
@@ -81,6 +77,16 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.user.username}: {self.content[:20]}"
 
+class Savedblog(models.Model):
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='saveblogs')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    
+    def __str__(self):
+        return f"{blog.title}"
+    
+    
 
 
     

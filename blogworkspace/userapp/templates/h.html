@@ -5,43 +5,421 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BlogBeat - Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+
+  .blogbeat-features {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #fdf8f3;
+    color: #2e2a32;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  
+  .blogbeat-features h2 {
+    font-size: 2.5rem;
+    color: #4e1d77;
+    margin-bottom: 0.5rem;
+  }
+  
+  .blogbeat-features .intro {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    color: #555;
+  }
+  
+  .features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .feature-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .icon {
+    font-size: 2.5rem;
+    color: #7c3aed;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background-color: #2e25b7;
+      color: white;
+    }
+
+    .hero-section {
+      padding: 60px 20px;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-image {
+      flex: 1 1 45%;
+      text-align: center;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-text {
+      flex: 1 1 45%;
+      padding: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+          header .logo {
+              font-size: 1.5rem;
+          }
+
+          nav ul {
+              flex-direction: column;
+              gap: 10px;
+          }
+
+          nav ul li a {
+              font-size: 1.2rem;
+          }
+      }
+
+      @media (max-width: 480px) {
+          header {
+              padding: 10px;
+          }
+
+          nav ul {
+              gap: 5px;
+          }
+
+          nav ul li a {
+              font-size: 1rem;
+          }
+      }
+  </style>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background-color: #2e25b7;
+      color: white;
+    }
+
+    .hero-section {
+      padding: 60px 20px;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-image {
+      flex: 1 1 45%;
+      text-align: center;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-text {
+      flex: 1 1 45%;
+      padding: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ffffffd9;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    /* Simple list with ticks */
+    .checklist {
+      margin: 20px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .checklist li {
+      font-size: 1.05rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .checklist li::before {
+      content: "✓ ";
+      color: #00ffb2;
+      font-weight: bold;
+    }
+
+    .hero-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 28px;
+      background-color: white;
+      color: #2e25b7;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .hero-button:hover {
+      background-color: #ffd700;
+      color: #2e25b7;
+    }
+
+    @media (max-width: 768px) {
+      .hero-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+
+
 </head>
-<body class="bg-[#1a2a3a] text-white">
+<body class="bg-white text-gray-800">
+
   <!-- Header -->
-  <header class="flex justify-between items-center px-8 py-4 bg-[#1a2a3a]">
-    <div class="text-2xl font-bold text-yellow-400">BlogBeat</div>
-    <nav class="space-x-6 text-white text-sm">
-      <a href="/" class="hover:text-yellow-400">Home</a>
-      <a href="/services" class="hover:text-yellow-400">Services</a>
-      <a href="/register" class="hover:text-yellow-400">Register</a>
-      <a href="/login" class="hover:text-yellow-400">Login</a>
+  <header class="flex items-center justify-between px-10 py-4 bg-[#000066] shadow-md">
+    <!-- Logo -->
+    <div class="text-2xl font-extrabold text-white">BlogBeat</div>
+
+    <!-- Navigation -->
+    <nav class="flex items-center space-x-6 text-white font-medium">
+      <a href="/services" class="hover:text-sky-300 transition">Dashboard</a>
+      <a href="{% url 'register' %}"class="hover:text-sky-300 transition">Register</a>
+      <a href="{% url 'login' %}" class="hover:text-sky-300 transition">Login</a>
+      
+      <!-- Profile Image (optional or visible when logged in) -->
+      <!-- <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
+        <img src="https://th.bing.com/th/id/OIP.6C6hSVMFU_SRBC-kx6srmwHaE8?w=1000&h=667&rs=1&pid=ImgDetMain" alt="User" class="w-full h-full object-cover" />
+      </div> -->
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section class="flex flex-col-reverse lg:flex-row items-center justify-between px-8 lg:px-20 py-16">
+  <section class="flex flex-col-reverse lg:flex-row items-center justify-between px-8 lg:px-20 py-16 bg-gray-50">
     <!-- Left Content -->
     <div class="lg:w-1/2 text-center lg:text-left">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
         Write. Read. Share.
         <br>
-        <span class="text-yellow-400">On BlogBeat</span> – Your Personal Blog Hub
+        <span class="text-sky-500">On BlogBeat</span> – Your Personal Blog Hub
       </h1>
-      <p class="text-gray-300 mt-4 max-w-md">
+      <p class="text-gray-600 mt-4 max-w-md">
         Join thousands of thinkers, writers, and readers building ideas through words. Publish your own blogs and explore content that truly matters.
       </p>
       <div class="mt-6 space-x-4">
-        <a href="/create-blog" class="inline-block bg-yellow-400 text-[#1a2a3a] font-semibold px-6 py-2 rounded-full hover:bg-yellow-300">Start Writing</a>
-        <a href="/blogs" class="inline-block bg-transparent border border-yellow-400 text-yellow-400 font-semibold px-6 py-2 rounded-full hover:bg-yellow-400 hover:text-[#1a2a3a]">Explore Blogs</a>
+        <a href="/create-blog" class="inline-block bg-sky-500 text-white font-semibold px-6 py-2 rounded-full shadow hover:bg-sky-400 transition">Start Writing</a>
+        <a href="/blogs" class="inline-block border border-sky-500 text-sky-500 font-semibold px-6 py-2 rounded-full hover:bg-sky-500 hover:text-white transition">Explore Blogs</a>
       </div>
     </div>
 
     <!-- Right Image -->
     <div class="lg:w-1/2 mb-12 lg:mb-0">
-      <div class="rounded-full overflow-hidden w-72 h-72 mx-auto shadow-lg border-4 border-yellow-400">
+      <div class="rounded-xl overflow-hidden w-72 h-72 mx-auto shadow-lg border border-gray-200">
         <img src="https://th.bing.com/th/id/OIP.6C6hSVMFU_SRBC-kx6srmwHaE8?w=1000&h=667&rs=1&pid=ImgDetMain" alt="Blogger" class="w-full h-full object-cover" />
       </div>
     </div>
   </section>
+
+  <section class="flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-16 bg-white">
+    <!-- Left Image -->
+    <div class="md:w-1/2 mb-10 md:mb-0">
+      <img src="https://www.gifcen.com/wp-content/uploads/2022/11/stickman-gif-6.gif" alt="Illustration" class="w-full max-w-md mx-auto" />
+    </div>
+  
+    <!-- Right Content -->
+    <div class="md:w-1/2 text-center md:text-left">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        What is BlogBeat?
+      </h2>
+      <p class="text-gray-600 text-lg mb-6 max-w-lg mx-auto md:mx-0">
+        BlogBeat is your personal space to express, share, and explore thoughts through blogs. Whether you're a writer or a reader, BlogBeat connects you with a like-minded community of storytellers and thinkers.
+      </p>
+      <a href="/about" class="inline-block border border-gray-800 text-gray-900 font-medium px-6 py-2 rounded-full hover:bg-gray-900 hover:text-white transition">
+        Learn more
+      </a>
+    </div>
+  </section>
+  
+  <section class="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 px-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      
+      <!-- Text Content -->
+      <div>
+        <h2 class="text-4xl font-bold mb-6">Understand Your Blog Audience</h2>
+        <p class="text-lg leading-relaxed text-gray-300">
+          BlogBeat gives you built-in analytics to track which posts perform best.  
+          Discover your audience’s location, interests, and behavior with real-time data.  
+          You can even integrate with tools like Google Analytics for deeper insights.
+        </p>
+      </div>
+  
+      <!-- Analytics Mockup Image -->
+      <div>
+        <img src="https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEiq__31yEgZLGBgHLopQRooH3t2bxVkWH5K7awU3d-GQZEKqXDtB9XovwEa3wWP5rODZzGB_hndiChBTJ0rkgcN4kQd90cb5RK62puHqGHxQQn3dNXdxtxkaPcaMfSSX0oUmR0qFWwbJ9P2scZx7tMWPW8_zwx_aNSFKvdw1JWlvw/d" alt="Analytics Example" class="rounded-lg shadow-lg">
+      </div>
+    </div>
+  </section>
+ 
+  <div class="hero-section">
+    <div class="hero-container">
+
+      <!-- Image -->
+      <div class="hero-image">
+        <img src="your-template-preview.png" alt="Template Preview">
+      </div>
+
+      <!-- Text Content -->
+      <div class="hero-text">
+        <h1>Hands Down, The Easiest Way To Share Your Voice — In Any Language.</h1>
+        <p>
+          <span class="highlight">BlogBeat</span> supports <strong>all major languages</strong>, making it the perfect platform for a global audience. From English, Spanish, French, Arabic, Hindi, Chinese, and beyond — <span class="highlight">BlogBeat</span> lets you write, publish, and connect without borders.
+        </p>
+        <ul class="checklist">
+          <li>Multilingual publishing</li>
+          <li>Language tags & filters</li>
+          <li>Rich media integration</li>
+          <li>SEO & analytics</li>
+          <li>Responsive design for all devices</li>
+        </ul>
+        
+        <a href="/start-blog" class="hero-button">Start Your Free Blog →</a>
+      </div>
+
+    </div>
+  </div> 
+
+  <section class="relative bg-indigo-800 text-white py-24 px-10 overflow-hidden">
+    <!-- Large Transparent B Logo Background -->
+    <img src="https://th.bing.com/th/id/OIP.yZvRhoVjfOUzQHkUyOxBzgHaF-?w=217&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7" alt="BlogBeat Logo" class="absolute opacity-10 w-[90%] max-w-5xl top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/4 pointer-events-none">
+  
+    <!-- Content Wrapper -->
+    <div class="relative max-w-5xl mx-auto text-right">
+      <h1 class="text-5xl font-bold leading-tight">
+        Join the millions <br />
+        of creators publishing <br />
+        with <span class="text-yellow-300">BlogBeat</span>.
+      </h1>
+      <p class="mt-6 text-lg text-indigo-200">
+        Build your blog—and your audience—with a powerful tool built for creators.
+        BlogBeat makes it lightning-fast, secure, and beautifully simple to publish your voice.
+      </p>
+  
+      <!-- CTA Button -->
+      <a href="/register" class="mt-8 inline-block bg-white text-indigo-900 font-semibold px-6 py-3 rounded shadow hover:bg-gray-200 transition">
+        Start a Blog
+      </a>
+    </div>
+  </section>
+ 
+
+
+  
+  
+
+  <section class="blogbeat-features">
+    <h2>Why You'll Love BlogBeat</h2>
+    <p class="intro">Every feature crafted for thinkers, talkers, and storytellers.</p>
+  
+    <div class="features-container">
+      <div class="feature-card">
+        <i class="icon">🎥</i>
+        <h3>Blog Video Chat</h3>
+        <p>Live talk about your post with your audience. Connect beyond words.</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon">💭</i>
+        <h3>Thought Exchange</h3>
+        <p>Swap ideas instantly with a snap-style message board.</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon">📌</i>
+        <h3>Saved Posts</h3>
+        <p>Bookmark gems and re-read them anytime. Your digital library.</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon">📈</i>
+        <h3>Read Analytics</h3>
+        <p>Track who’s vibing with your content and where they’re from.</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon">🎨</i>
+        <h3>Personal Themes</h3>
+        <p>Pick your aesthetic. Switch moods with a tap.</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon">✍️</i>
+        <h3>Co-Blogging</h3>
+        <p>Write side by side with your friends in real-time.</p>
+      </div>
+    </div>
+  </section>
+  
+
 </body>
 </html>
